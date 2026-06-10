@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ================ TOKENS ================ */
+:root {
+  --ink:    #0A0907;
+  --soot:   #141210;
+  --crow:   #1A1814;
+  --bone:   #F2EBD8;
+  --rice:   #F8F4E7;
+  --lime:   #C9D24A;
+  --ash:    #8B847A;
+  --chalk:  #C9C1AE;
+  --rule:   rgba(201, 193, 174, 0.18);
+
+  --ease:   cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-ink: cubic-bezier(0.7, 0, 0.3, 1);
+
+  --cursor-x: 50vw;
+  --cursor-y: 50vh;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--ink);
+  color: var(--bone);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  overflow-x: hidden;
+  /* hide the system cursor on desktop — we render our own feather field */
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  a, button, [data-cursor="hover"] { cursor: none; }
+}
+
+::selection { background: var(--lime); color: var(--ink); }
+
+/* ================ TYPOGRAPHY ================ */
+.display {
+  font-family: var(--font-fraunces), Fraunces, Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+  font-variation-settings: 'opsz' 144, 'SOFT' 50;
+}
+.display-italic {
+  font-family: var(--font-fraunces), Fraunces, Georgia, serif;
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.012em;
+}
+.thai {
+  font-family: var(--font-noto-thai), 'Noto Serif Thai', serif;
+}
+
+.eyebrow {
+  font-family: var(--font-inter), Inter, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--chalk);
+}
+
+/* ================ HAIRLINES ================ */
+.ink-rule {
+  display: inline-block;
+  height: 1px;
+  width: 64px;
+  background: var(--chalk);
+  opacity: 0.6;
+}
+.ink-rule.wide { width: 140px; }
+
+/* ================ BUTTONS ================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 26px;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  border: 1px solid var(--bone);
+  color: var(--bone);
+  background: transparent;
+  position: relative; overflow: hidden; isolation: isolate;
+  transition: color 0.5s var(--ease), border-color 0.5s var(--ease);
+}
+.btn::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--bone);
+  transform: translateY(101%);
+  transition: transform 0.6s var(--ease-ink);
+  z-index: -1;
+}
+.btn:hover { color: var(--ink); }
+.btn:hover::before { transform: translateY(0); }
+
+.btn.btn-solid {
+  background: var(--bone); color: var(--ink); border-color: var(--bone);
+}
+.btn.btn-solid::before { background: var(--lime); }
+.btn.btn-solid:hover { color: var(--ink); border-color: var(--lime); }
+
+.btn-arrow { transition: transform 0.4s var(--ease); }
+.btn:hover .btn-arrow { transform: translateX(6px); }
+
+/* ================ INK BLEED MASK ================ */
+/* Used by the wordmark — an SVG turbulence morph that grows from a center point. */
+.ink-bleed {
+  -webkit-mask-image: radial-gradient(circle at center, #000 var(--bleed, 0%), transparent calc(var(--bleed, 0%) + 8%));
+          mask-image: radial-gradient(circle at center, #000 var(--bleed, 0%), transparent calc(var(--bleed, 0%) + 8%));
+}
+
+/* ================ SPLIT-FLAP ================ */
+.flap {
+  perspective: 800px;
+}
+.flap-card {
+  transform-style: preserve-3d;
+  transform-origin: center bottom;
+  transition: transform 0.65s cubic-bezier(0.7, 0, 0.3, 1);
+}
+.flap.is-on .flap-card { transform: rotateX(-180deg); }
+.flap-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flap-back { transform: rotateX(180deg); }
+
+/* ================ SCAN / CRT FOR PRESS WALL ================ */
+.press-scan {
+  background-image:
+    repeating-linear-gradient(0deg,
+      rgba(201,193,174,0.04) 0px,
+      rgba(201,193,174,0.04) 1px,
+      transparent 1px,
+      transparent 3px);
+}
+
+/* ================ MARQUEE ================ */
+.crow-marquee { overflow: hidden; }
+.crow-marquee-track {
+  animation: crowMarquee 54s linear infinite;
+  will-change: transform;
+}
+.crow-marquee:hover .crow-marquee-track,
+.crow-marquee:active .crow-marquee-track,
+.crow-marquee:focus-within .crow-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes crowMarquee {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.3333%, 0, 0); }
+}
+
+/* ================ INK DROP HERO ================ */
+@keyframes ink-bloom {
+  0%   { transform: scale(0.05); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: scale(2.4);  opacity: 1; }
+}
+.ink-bloom { animation: ink-bloom 1.6s var(--ease-ink) forwards; }
+
+/* Crow glide on scroll — uses --crow-x set via JS */
+.crow-glide {
+  transform: translate3d(calc(var(--crow-x, 0px)), 0, 0);
+  will-change: transform;
+}
+
+/* ================ STAMP REVEAL ================ */
+.stamp {
+  display: inline-block;
+  transform: rotate(-4deg);
+  border: 1.5px solid var(--chalk);
+  padding: 3px 10px;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--chalk);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.stamp.is-on {
+  opacity: 1;
+  transform: rotate(-4deg) scale(1);
+  animation: stamp-pop 0.5s var(--ease-ink);
+}
+@keyframes stamp-pop {
+  0% { opacity: 0; transform: rotate(-4deg) scale(1.3); }
+  100% { opacity: 1; transform: rotate(-4deg) scale(1); }
+}
+
+/* ================ FOCUS ================ */
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+
+/* ================ REDUCED MOTION ================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  body { cursor: auto !important; }
+}
