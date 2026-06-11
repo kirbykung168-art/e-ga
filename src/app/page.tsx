@@ -5,6 +5,9 @@ import Manifesto from '@/components/Manifesto';
 import RegionalMap from '@/components/RegionalMap';
 import Menu from '@/components/Menu';
 import Branches from '@/components/Branches';
+import APinkRabbit from '@/components/APinkRabbit';
+import Events from '@/components/Events';
+import IGGrid from '@/components/IGGrid';
 import PressWall from '@/components/PressWall';
 import Reserve from '@/components/Reserve';
 import Footer from '@/components/Footer';
@@ -14,9 +17,12 @@ import EasterEgg from '@/components/EasterEgg';
 /**
  * e-ga · single-page tribute.
  *
- * Audit fix v3: removed StickyProof — a senior reviewer pointed out that
- * editorial sites don't carry persistent CTAs; the rating already has a
- * dedicated paired moment inside PressWall.
+ * Section order (v5 — sales-closing pass):
+ *   Hero · Marquee · Manifesto · RegionalMap · Menu · Branches ·
+ *   A Pink Rabbit (bakery sister) · Events (Sukhumvit 23) · IG Grid ·
+ *   PressWall · Reserve · Footer.
+ *
+ * Cross-cutting: FeatherCursor (desktop), EasterEgg (type "ega").
  */
 export default function HomePage() {
   return (
@@ -30,6 +36,9 @@ export default function HomePage() {
       <RegionalMap />
       <Menu />
       <Branches />
+      <APinkRabbit />
+      <Events />
+      <IGGrid />
       <PressWall />
       <Reserve />
       <Footer />

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Fraunces, Inter, Noto_Serif_Thai } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
-import { BRAND, BRANCHES } from '@/lib/content';
+import { BRAND, BRANCHES, SMALL_MENU } from '@/lib/content';
 import { LanguageProvider } from '@/components/LanguageProvider';
 import HtmlLangSync from '@/components/HtmlLangSync';
 
@@ -18,7 +19,7 @@ const notoThai = Noto_Serif_Thai({
   variable: '--font-noto-thai', display: 'swap',
 });
 
-const SITE = 'https://e-ga.vercel.app';
+const SITE = `https://${BRAND.domain}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
@@ -35,7 +36,14 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE },
 };
 
-const JSONLD = {
+/**
+ * JSON-LD — three schemas concatenated:
+ *   1. FoodEstablishment (org + all branches)
+ *   2. Menu (the three signature dishes as MenuItem)
+ *   3. WebSite (search action)
+ * Helps Google show rich results: rating stars, menu carousel, address card.
+ */
+const JSONLD_ORG = {
   '@context': 'https://schema.org',
   '@type': 'FoodEstablishment',
   name: 'e-ga',
@@ -51,11 +59,35 @@ const JSONLD = {
   location: BRANCHES.map((b) => ({
     '@type': 'Restaurant',
     name: `e-ga · ${b.name.en}`,
-    address: { '@type': 'PostalAddress', streetAddress: b.address.en },
+    address: { '@type': 'PostalAddress', streetAddress: b.address.en, addressLocality: 'Bangkok', addressCountry: 'TH' },
+    geo: { '@type': 'GeoCoordinates', latitude: b.lat, longitude: b.lng },
     telephone: b.phoneTel,
     openingHours: 'Mo-Su 08:00-22:00',
   })),
   sameAs: [BRAND.instagramUrl, BRAND.facebookUrl, BRAND.linktreeUrl],
+};
+
+const JSONLD_MENU = {
+  '@context': 'https://schema.org',
+  '@type': 'Menu',
+  name: 'e-ga · Signature dishes',
+  hasMenuSection: [{
+    '@type': 'MenuSection',
+    name: 'Signatures',
+    hasMenuItem: SMALL_MENU.signatures.map((s: any) => ({
+      '@type': 'MenuItem',
+      name: s.name.en,
+      description: s.desc.en,
+      offers: s.price ? { '@type': 'Offer', price: String(s.price).replace(/[^0-9]/g, ''), priceCurrency: 'THB' } : undefined,
+    })),
+  }],
+};
+
+const JSONLD_WEBSITE = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'e-ga',
+  url: SITE,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -68,10 +100,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             curated EN strings. */}
         <meta name="google" content="notranslate" />
         <meta name="robots" content="notranslate" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_ORG) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_MENU) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD_WEBSITE) }} />
       </head>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:bg-bone focus:text-ink focus:px-4 focus:py-3 focus:text-[11px] focus:tracking-[0.28em] focus:uppercase">
@@ -81,6 +112,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <HtmlLangSync />
           <main id="main">{children}</main>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   );
