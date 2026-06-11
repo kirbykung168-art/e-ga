@@ -34,7 +34,7 @@ export const BRAND = {
   priceBand: { en: '฿200 – ฿400 per head', th: '฿200 – ฿400 ต่อคน' },
 
   /** Canonical domain — used by sitemap/robots/JSON-LD. Update on custom-domain attach. */
-  domain: 'e-ga-bangkok.vercel.app',
+  domain: 'e-ga.vercel.app',
 };
 
 /**
