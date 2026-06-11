@@ -438,6 +438,15 @@ export const COPY = {
       en: 'e-ga is a crow — clever, dark of feather, drawn to the bright thing. We fly between provinces and pick up recipes from grandmothers who have cooked the same dish, the same way, for sixty years. We bring them back to Song Wat — sometimes faithful, sometimes mischievous. Always rooted.',
       th: 'อีกาเป็นนก — ฉลาด ขนดำ ติดของเงาวับ · พวกเราบินระหว่างจังหวัด เก็บสูตรจากย่า-ยาย ที่ทำจานเดิม วิธีเดิม มาหกสิบปี · พากลับมาทรงวาด · บางจานซื่อ บางจานซน · แต่รากเดิมเสมอ',
     },
+
+    founderRole: {
+      en: 'Siriwan Tharananithikul · designer, It\'s Happened to be a Closet',
+      th: 'ศิริวรรณ ธารานันทิกุล · ดีไซเนอร์เครืออิส_แฮพ_เพ่น',
+    },
+    founderEthos: {
+      en: 'Born from the same designer who built the Closet family — same eye, same hand, now turned to the regional table.',
+      th: 'จากดีไซเนอร์คนเดียวกับ Closet — สายตาเดิม มือเดิม ทีนี้หันมาทำสำรับภูมิภาค',
+    },
   },
 
   map: {
