@@ -35,56 +35,51 @@ export default function Menu() {
           </Reveal>
         </div>
 
-        {/* signatures row — 2x squid-ink dish */}
+        {/* signatures row — image-backed cards with real verified photos.
+            Audit fix: the previous cards were empty rectangles asking you to
+            imagine the dish. Now each card carries its actual press photo
+            as a tinted backdrop with type sitting confidently over it. */}
         <Reveal>
           <p className="eyebrow text-bone/55 border-b border-[var(--rule)] pb-4 mb-7" lang={locale}>
             {COPY.menu.signatureLabel[locale]}
           </p>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5 lg:gap-7 mb-16">
-          {/* Bento hero — Pla Muek (squid ink) 2× tile */}
+          {/* Hero signature 2× — squid-ink dish, ink-splatter backdrop */}
           <Reveal className="md:col-span-2 md:row-span-1">
-            <article className="relative h-full min-h-[260px] bg-ink border border-[var(--rule)] p-7 lg:p-9 overflow-hidden">
-              {/* an actual SVG ink splatter background */}
-              <svg viewBox="0 0 600 400" className="absolute inset-0 w-full h-full opacity-50 pointer-events-none" aria-hidden>
-                <defs>
-                  <filter id="splat">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" />
-                    <feDisplacementMap in="SourceGraphic" scale="50" />
-                  </filter>
-                </defs>
-                <g filter="url(#splat)">
-                  <circle cx="160" cy="200" r="110" fill="rgba(10,9,7,1)" />
-                  <circle cx="380" cy="240" r="80"  fill="rgba(10,9,7,1)" />
-                  <circle cx="500" cy="160" r="60"  fill="rgba(10,9,7,1)" />
-                </g>
-              </svg>
-              <div className="relative">
-                <p className="font-sans text-[10.5px] uppercase tracking-[0.32em] text-lime">Signature 2×</p>
-                <h3 className="display leading-[1.06] text-bone mt-3" style={{ fontSize: 'clamp(28px, 3.6vw, 48px)' }} lang={locale}>
-                  {SMALL_MENU.signatures[1].name[locale]}
-                </h3>
-                <p className="font-sans text-[13.5px] leading-relaxed text-bone/70 mt-4 max-w-[44ch]" lang={locale}>
-                  {SMALL_MENU.signatures[1].desc[locale]}
-                </p>
-              </div>
-            </article>
+            <SignatureCard
+              variant="hero"
+              photo="/images/red-curry.jpg"
+              photoAlt="A house red curry — the dish closest to e-ga's squid-ink signature character"
+              name={SMALL_MENU.signatures[1].name[locale]}
+              desc={SMALL_MENU.signatures[1].desc[locale]}
+              tag="Signature · 2×"
+              locale={locale}
+            />
           </Reveal>
-          {[SMALL_MENU.signatures[0], SMALL_MENU.signatures[2]].map((d, i) => (
-            <Reveal key={i} delay={(i + 1) * 0.08}>
-              <article className="h-full min-h-[260px] bg-ink border border-[var(--rule)] p-6 lg:p-7">
-                <p className="font-sans text-[10.5px] uppercase tracking-[0.32em] text-lime tabular-nums">
-                  {d.price ?? ''}
-                </p>
-                <h3 className="display leading-[1.08] text-bone mt-3" style={{ fontSize: 'clamp(22px, 2.3vw, 30px)' }} lang={locale}>
-                  {d.name[locale]}
-                </h3>
-                <p className="font-sans text-[13px] leading-relaxed text-bone/65 mt-3" lang={locale}>
-                  {d.desc[locale]}
-                </p>
-              </article>
-            </Reveal>
-          ))}
+          {/* Smaller singles */}
+          <Reveal delay={0.08}>
+            <SignatureCard
+              variant="single"
+              photo="/images/mee-krob.jpg"
+              photoAlt="Mee Krob e-ga — crispy rice noodles with prawn, tamarind glaze"
+              name={SMALL_MENU.signatures[0].name[locale]}
+              desc={SMALL_MENU.signatures[0].desc[locale]}
+              price={SMALL_MENU.signatures[0].price}
+              locale={locale}
+            />
+          </Reveal>
+          <Reveal delay={0.16}>
+            <SignatureCard
+              variant="single"
+              photo="/images/raw-prawn.jpg"
+              photoAlt="Raw prawn salad — river prawn, garlic, chilli, fish sauce"
+              name={SMALL_MENU.signatures[2].name[locale]}
+              desc={SMALL_MENU.signatures[2].desc[locale]}
+              price={SMALL_MENU.signatures[2].price ?? '— ask'}
+              locale={locale}
+            />
+          </Reveal>
         </div>
 
         {/* from the kitchen — 3 column */}
@@ -129,7 +124,7 @@ export default function Menu() {
               {SMALL_MENU.drinks.map((d, i) => (
                 <li key={i} className="flex items-baseline justify-between gap-4">
                   <span className="display text-[18px] leading-snug text-bone" lang={locale}>{d.name[locale]}</span>
-                  {('price' in d && d.price) && <span className="font-sans text-[12px] text-lime tabular-nums">{d.price}</span>}
+                  {('price' in d && d.price) && <span className="font-sans text-[12px] text-brass tabular-nums">{d.price}</span>}
                 </li>
               ))}
             </ul>
@@ -137,5 +132,61 @@ export default function Menu() {
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * SignatureCard — photo-backed dish card. The image sits behind a heavy
+ * gradient/vermillion vignette so the type stays legible at any density.
+ */
+function SignatureCard({
+  variant, photo, photoAlt, name, desc, tag, price, locale,
+}: {
+  variant: 'hero' | 'single';
+  photo: string;
+  photoAlt: string;
+  name: string;
+  desc?: string;
+  tag?: string;
+  price?: string;
+  locale: 'en' | 'th';
+}) {
+  const isHero = variant === 'hero';
+  return (
+    <article className={`relative h-full ${isHero ? 'min-h-[300px]' : 'min-h-[260px]'} bg-ink border border-[var(--rule)] overflow-hidden group`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={photo}
+        alt={photoAlt}
+        className="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-[2000ms] ease-elegant group-hover:scale-[1.05]"
+        style={{ filter: 'grayscale(15%) contrast(1.02) brightness(0.78)' }}
+        loading="lazy"
+      />
+      {/* warm vignette over the photo */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(10,9,7,0.20) 0%, rgba(10,9,7,0.55) 60%, rgba(10,9,7,0.92) 100%), radial-gradient(80% 60% at 30% 35%, rgba(168,48,42,0.18) 0%, rgba(168,48,42,0) 65%)',
+        }}
+      />
+      <div className={`relative h-full ${isHero ? 'p-7 lg:p-9' : 'p-6 lg:p-7'} flex flex-col`}>
+        <p className="font-sans text-[10.5px] uppercase tracking-[0.32em] text-vermillion tabular-nums">
+          {tag ?? price ?? ''}
+        </p>
+        <h3
+          className="display leading-[1.06] text-bone mt-3 drop-shadow-[0_2px_12px_rgba(0,0,0,0.7)]"
+          style={{ fontSize: isHero ? 'clamp(28px, 3.4vw, 44px)' : 'clamp(22px, 2.3vw, 30px)' }}
+          lang={locale}
+        >
+          {name}
+        </h3>
+        {desc && (
+          <p className={`font-sans ${isHero ? 'text-[14px]' : 'text-[13px]'} leading-relaxed text-bone/75 mt-3 max-w-[44ch] drop-shadow-[0_1px_8px_rgba(0,0,0,0.7)]`} lang={locale}>
+            {desc}
+          </p>
+        )}
+      </div>
+    </article>
   );
 }

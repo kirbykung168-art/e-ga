@@ -3,16 +3,14 @@
 import { useReducedMotion } from 'framer-motion';
 
 const TAGS = [
-  'อีกา',
   'Local Breakfast',
-  'Song Wat · est',
-  'Mee Krob',
+  'Mee Krob e-ga',
   'Pla Muek Nam Dum Manao',
-  'Sukhumvit 23',
-  'Sathorn 12',
-  'Luv Seafood',
-  '4.1 ★ · 749 reviews',
-  'อิส_แฮพ_เพ่น',
+  'Raw Prawn Salad',
+  'Kanom Krok',
+  'Kua Kling',
+  'Sour Curry',
+  'River Prawn',
 ];
 
 export default function Marquee() {
@@ -33,16 +31,5 @@ export default function Marquee() {
         {list.map((t, i) => <Tag key={i}>{t}</Tag>)}
       </div>
     </div>
-  );
-}
-
-function Tag({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-10 font-sans text-[11.5px] uppercase tracking-[0.32em] text-bone/70">
-      {children}
-      <svg width="9" height="9" viewBox="0 0 9 9" aria-hidden>
-        <circle cx="4.5" cy="4.5" r="1.6" fill="var(--lime)" />
-      </svg>
-    </span>
   );
 }
