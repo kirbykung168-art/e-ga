@@ -4,13 +4,6 @@ import { COPY, SMALL_MENU } from '@/lib/content';
 import { useLocale } from './LanguageProvider';
 import Reveal from './Reveal';
 
-/**
- * BENTO MENU — the signature 2× tile is the squid-ink dish.
- *
- *   row 1: [ signature dish 2× wide ]  [ signature ] [ signature ]
- *   row 2: a 3-column "from the kitchen" list
- *   row 3: dessert + drinks side by side
- */
 export default function Menu() {
   const { locale } = useLocale();
 
@@ -19,7 +12,7 @@ export default function Menu() {
       <div className="mx-auto max-w-[1480px] px-5 lg:px-10">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-10 items-end mb-14">
           <Reveal>
-            <p className="eyebrow text-lime">{COPY.menu.eyebrow[locale]}</p>
+            <p className="eyebrow text-vermillion">{COPY.menu.eyebrow[locale]}</p>
             <h2
               className="display leading-[1.02] mt-5"
               style={{ fontSize: 'clamp(34px, 5vw, 76px)' }}
@@ -35,34 +28,54 @@ export default function Menu() {
           </Reveal>
         </div>
 
-        {/* signatures row — image-backed cards with real verified photos.
-            Audit fix: the previous cards were empty rectangles asking you to
-            imagine the dish. Now each card carries its actual press photo
-            as a tinted backdrop with type sitting confidently over it. */}
         <Reveal>
           <p className="eyebrow text-bone/55 border-b border-[var(--rule)] pb-4 mb-7" lang={locale}>
             {COPY.menu.signatureLabel[locale]}
           </p>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5 lg:gap-7 mb-16">
-          {/* Hero signature 2× — squid-ink dish, ink-splatter backdrop */}
           <Reveal className="md:col-span-2 md:row-span-1">
-            <SignatureCard
-              variant="hero"
-              photo="/images/red-curry.jpg"
-              photoAlt="A house red curry — the dish closest to e-ga's squid-ink signature character"
-              name={SMALL_MENU.signatures[1].name[locale]}
-              desc={SMALL_MENU.signatures[1].desc[locale]}
-              tag="Signature · 2×"
-              locale={locale}
-            />
+            <article className="relative h-full min-h-[300px] bg-soot border border-[var(--rule)] overflow-hidden p-7 lg:p-9 flex flex-col">
+              <svg viewBox="0 0 600 400" className="absolute inset-0 w-full h-full opacity-60 pointer-events-none" aria-hidden>
+                <defs>
+                  <filter id="splat-2x">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.024" numOctaves="3" seed="3" />
+                    <feDisplacementMap in="SourceGraphic" scale="60" />
+                    <feGaussianBlur stdDeviation="0.6" />
+                  </filter>
+                </defs>
+                <g filter="url(#splat-2x)">
+                  <circle cx="170" cy="180" r="120" fill="#000" />
+                  <circle cx="390" cy="220" r="90"  fill="#000" />
+                  <circle cx="490" cy="120" r="55"  fill="#000" />
+                  <ellipse cx="300" cy="320" rx="60" ry="30" fill="#000" />
+                </g>
+              </svg>
+              <div className="relative">
+                <p className="font-sans text-[10.5px] uppercase tracking-[0.32em] text-vermillion">
+                  Signature · 2×
+                </p>
+                <h3
+                  className="display leading-[1.04] text-bone mt-3"
+                  style={{ fontSize: 'clamp(32px, 4vw, 56px)' }}
+                  lang={locale}
+                >
+                  {SMALL_MENU.signatures[1].name[locale]}
+                </h3>
+                <p className="font-sans text-[14px] leading-relaxed text-bone/80 mt-5 max-w-[44ch]" lang={locale}>
+                  {SMALL_MENU.signatures[1].desc[locale]}
+                </p>
+              </div>
+              <p className="relative mt-auto font-sans text-[10px] uppercase tracking-[0.32em] text-bone/40">
+                Krabi · Andaman · daily
+              </p>
+            </article>
           </Reveal>
-          {/* Smaller singles */}
           <Reveal delay={0.08}>
             <SignatureCard
               variant="single"
               photo="/images/mee-krob.jpg"
-              photoAlt="Mee Krob e-ga — crispy rice noodles with prawn, tamarind glaze"
+              photoAlt="Mee Krob e-ga — crispy rice noodles with prawn, tamarind glaze, lime, chilli, coriander, on a white plate with blue rim"
               name={SMALL_MENU.signatures[0].name[locale]}
               desc={SMALL_MENU.signatures[0].desc[locale]}
               price={SMALL_MENU.signatures[0].price}
@@ -73,7 +86,7 @@ export default function Menu() {
             <SignatureCard
               variant="single"
               photo="/images/raw-prawn.jpg"
-              photoAlt="Raw prawn salad — river prawn, garlic, chilli, fish sauce"
+              photoAlt="Raw prawn over bitter-melon slices with a green seafood relish, quail eggs and mint, on a green-and-white striped plate"
               name={SMALL_MENU.signatures[2].name[locale]}
               desc={SMALL_MENU.signatures[2].desc[locale]}
               price={SMALL_MENU.signatures[2].price ?? '— ask'}
@@ -82,7 +95,6 @@ export default function Menu() {
           </Reveal>
         </div>
 
-        {/* from the kitchen — 3 column */}
         <Reveal>
           <p className="eyebrow text-bone/55 border-b border-[var(--rule)] pb-4 mb-7" lang={locale}>
             {COPY.menu.plateLabel[locale]}
@@ -93,7 +105,7 @@ export default function Menu() {
             <li key={i} className="flex items-baseline justify-between gap-4 border-b border-[var(--rule)] pb-3">
               <span className="display text-[18px] leading-snug text-bone" lang={locale}>{d.name[locale]}</span>
               {('price' in d && d.price) ? (
-                <span className="font-sans text-[12px] tracking-wider text-lime tabular-nums whitespace-nowrap">{d.price}</span>
+                <span className="font-sans text-[12px] tracking-wider text-brass tabular-nums whitespace-nowrap">{d.price}</span>
               ) : (
                 <span className="font-sans text-[11px] tracking-[0.22em] uppercase text-bone/45">ask</span>
               )}
@@ -101,7 +113,6 @@ export default function Menu() {
           ))}
         </ul>
 
-        {/* desserts + drinks */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
           <div>
             <p className="eyebrow text-bone/55 border-b border-[var(--rule)] pb-4 mb-7" lang={locale}>
@@ -111,7 +122,7 @@ export default function Menu() {
               {SMALL_MENU.desserts.map((d, i) => (
                 <li key={i} className="flex items-baseline justify-between gap-4">
                   <span className="display italic text-[18px] leading-snug text-bone" lang={locale}>{d.name[locale]}</span>
-                  {('price' in d && d.price) && <span className="font-sans text-[12px] text-lime tabular-nums">{d.price}</span>}
+                  {('price' in d && d.price) && <span className="font-sans text-[12px] text-brass tabular-nums">{d.price}</span>}
                 </li>
               ))}
             </ul>
@@ -135,10 +146,6 @@ export default function Menu() {
   );
 }
 
-/**
- * SignatureCard — photo-backed dish card. The image sits behind a heavy
- * gradient/vermillion vignette so the type stays legible at any density.
- */
 function SignatureCard({
   variant, photo, photoAlt, name, desc, tag, price, locale,
 }: {
@@ -162,7 +169,6 @@ function SignatureCard({
         style={{ filter: 'grayscale(15%) contrast(1.02) brightness(0.78)' }}
         loading="lazy"
       />
-      {/* warm vignette over the photo */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

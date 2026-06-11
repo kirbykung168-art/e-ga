@@ -12,17 +12,14 @@ import { useLocale } from './LanguageProvider';
  *  Photo: switched from the busy lab-19 "spread" to sawasdee-ega.jpg —
  *    the verified Sawasdee shot of e-ga Luv Seafood with the brand's
  *    hand-illustrated crab + octopus mascots on the shophouse window.
- *    Editorial. Atmospheric. Brand-coherent. The cartoon characters
- *    carry the witty/mischievous voice the brand actually has.
+ *    Editorial. Atmospheric. Brand-coherent.
  *
  *  Headline: Thai-first ("กินเช้า / จากทั่วไทย"), the founder's verbatim
  *    line. The English ("Local breakfast, from across Thailand.") is the
- *    response, set in italic Fraunces with NO colour change — the italic
- *    does the work alone. Lime stripped from the type.
+ *    response, set in italic Fraunces with NO colour change.
  *
  *  Signature: replaced the geometric circle-clip wipe with a real SVG
- *    turbulence-displaced ink mask. The photo bleeds into view through
- *    organic, watercolour-fed edges, not a clean disc.
+ *    turbulence-displaced ink mask. Organic, watercolour-fed edges.
  */
 export default function Hero() {
   const { locale } = useLocale();
@@ -31,7 +28,6 @@ export default function Hero() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const y       = useTransform(scrollYProgress, [0, 1], ['0%', '14%']);
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.5]);
-  // crow glide — kept, but stays inside the section thanks to overflow-hidden
   const crowX = useTransform(scrollYProgress, [0, 1], ['-20vw', '120vw']);
 
   return (
@@ -40,7 +36,6 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[100svh] w-full overflow-hidden bg-ink"
     >
-      {/* gliding crow */}
       <motion.div
         aria-hidden
         style={{ x: crowX }}
@@ -54,7 +49,6 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 mx-auto max-w-[1480px] px-5 lg:px-10 pt-[120px] lg:pt-[140px] pb-16 lg:pb-24 grid lg:grid-cols-[1.15fr_1fr] gap-10 lg:gap-20 items-center">
-        {/* left: type stack */}
         <div>
           <motion.p
             initial={reduced ? false : { opacity: 0, letterSpacing: '0.6em' }}
@@ -67,8 +61,6 @@ export default function Hero() {
             {COPY.hero.eyebrow[locale]}
           </motion.p>
 
-          {/* Bilingual headline — TH leads at large display weight, EN
-              under it in italic for the response. */}
           <h1 className="display leading-[1.02] text-bone" lang="th">
             <span className="thai block font-normal" style={{ fontSize: 'clamp(48px, 7.8vw, 116px)', lineHeight: 1 }}>
               {locale === 'th' ? COPY.hero.title.th : 'กินเช้า'}
@@ -76,7 +68,6 @@ export default function Hero() {
             <span className="thai block font-normal mt-1" style={{ fontSize: 'clamp(34px, 5.4vw, 80px)', lineHeight: 1.05, color: 'var(--brass-lt)' }}>
               {locale === 'th' ? COPY.hero.titleAccent.th : 'จากทั่วไทย'}
             </span>
-            {/* English response — quieter, in italic Fraunces, ash white */}
             <span className="block display-italic mt-6 text-bone/85" style={{ fontSize: 'clamp(20px, 2.2vw, 30px)', lineHeight: 1.2 }} lang="en">
               {COPY.hero.title.en} {COPY.hero.titleAccent.en}
             </span>
@@ -117,29 +108,23 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* right: real ink-bleed reveal — SVG mask driven by feTurbulence
-            + feDisplacementMap. The mask grows from a center point and
-            the edges are organic, watercolour-fed, not a clean circle. */}
         <motion.div
           style={{ y, opacity }}
           className="relative aspect-[3/4] lg:aspect-[5/7] max-w-[520px] mx-auto lg:ml-auto w-full"
         >
-          {/* offset back-plate */}
           <div className="absolute -left-6 -top-6 lg:-left-10 lg:-top-10 right-8 bottom-8 bg-crow border border-[var(--rule)]" />
 
           <InkMaskedImage
             src="/images/sawasdee-ega.jpg"
-            alt="e-ga Luv Seafood at Song Wat — hand-illustrated octopus and crab mascots on the window, vintage shophouse interior. Verified press photograph (Thai Airways Sawasdee, May 2025)."
+            alt="The e-ga Luv Seafood window on Song Wat — hand-drawn pink octopus and red crab mascots painted on the glass, marble breakfast table with prawns and dipping sauces, vintage shophouse interior with raw walls. Verified press shot (Thai Airways Sawasdee, May 2025). Luv Seafood is e-ga's sister concept, 200 metres from the original."
             reduced={!!reduced}
           />
 
-          {/* hairline brass corners */}
           <span className="absolute pointer-events-none" style={{ top: 8, left: 8, width: 22, height: 22, borderTop: '1px solid var(--brass)', borderLeft: '1px solid var(--brass)' }} />
           <span className="absolute pointer-events-none" style={{ bottom: 8, right: 8, width: 22, height: 22, borderBottom: '1px solid var(--brass)', borderRight: '1px solid var(--brass)' }} />
 
-          {/* caption — credits the publication, location, and the year */}
           <p className="absolute -bottom-7 left-0 font-sans text-[10px] uppercase tracking-[0.32em] text-bone/55">
-            e-ga Luv Seafood · Song Wat · ph. Sawasdee 2025
+            sister concept · Luv Seafood · ph. Sawasdee 2025
           </p>
         </motion.div>
       </div>
@@ -147,12 +132,6 @@ export default function Hero() {
   );
 }
 
-/**
- * InkMaskedImage — the photo reveals through an SVG mask whose edges are
- * displaced by feTurbulence, growing radially from center. This is the
- * actual ink-bleed the brief asked for (and the critic flagged the
- * absence of). Pure SVG / CSS — no canvas, no shader.
- */
 function InkMaskedImage({ src, alt, reduced }: { src: string; alt: string; reduced: boolean }) {
   return (
     <div className="absolute inset-0 overflow-hidden" style={{ maskImage: 'url(#ink-bleed-mask)', WebkitMaskImage: 'url(#ink-bleed-mask)' }}>
@@ -171,7 +150,6 @@ function InkMaskedImage({ src, alt, reduced }: { src: string; alt: string; reduc
           quality={88}
           className="object-cover object-center"
         />
-        {/* warm-grade veil — pulls colour temperature toward the brand */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -181,9 +159,6 @@ function InkMaskedImage({ src, alt, reduced }: { src: string; alt: string; reduc
         />
       </motion.div>
 
-      {/* The mask itself — a turbulence-displaced radial blob that grows
-          from 0 to full. Lives at page level so it can be referenced by
-          url(#ink-bleed-mask). */}
       <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden>
         <defs>
           <filter id="ink-displace" x="-20%" y="-20%" width="140%" height="140%">

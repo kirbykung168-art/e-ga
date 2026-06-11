@@ -5,27 +5,14 @@ import { BRANCHES, COPY, SISTER } from '@/lib/content';
 import { useLocale } from './LanguageProvider';
 import Reveal from './Reveal';
 
-/**
- * Branch switcher v3 — split-flap board.
- *
- * Audit fix: the previous flap cards had 60% empty middles and asked the
- * visitor to flip a blank front. Now each card front carries:
- *   - an atmospheric photograph as background (different per branch,
- *     drawn from the verified press archive)
- *   - a today's-special line in a small departure-board glyph row
- *   - a clear FLIP prompt at the bottom — the visitor flips into the
- *     detailed address/hours/phone face
- */
-
-// Branch hero photographs — picked to differentiate the three rooms.
 const BRANCH_PHOTO: Record<string, { src: string; alt: string }> = {
-  'song-wat':     { src: '/images/lab-19.jpg',       alt: 'e-ga LAB · Song Wat — verified press photograph of the original' },
-  'sathorn-12':   { src: '/images/raw-prawn.jpg',    alt: 'e-ga Sathorn 12 — raw prawn salad, signature lunch plate' },
-  'sukhumvit-23': { src: '/images/river-prawn.jpg',  alt: 'e-ga Sukhumvit 23 — river prawn, inside It\'s Happened to be a Closet' },
+  'song-wat':     { src: '/images/lab-19.jpg',         alt: 'e-ga LAB · Song Wat — the full house table, brass curry pot, eight plates. Verified Samurai Gourmet press shoot.' },
+  'sathorn-12':   { src: '/images/mee-krob.jpg',       alt: 'e-ga / Sathorn 12 — the signature mee krob plated with prawn, lime, herbs. Verified press shoot.' },
+  'sukhumvit-23': { src: '/images/pineapple-chili.jpg', alt: 'e-ga / Sukhumvit 23 — house pineapple with chilli-salt-sugar dip on banana leaf. Verified press shoot.' },
 };
 
 const BRANCH_TODAY: Record<string, { en: string; th: string }> = {
-  'song-wat':     { en: 'today · mee krob + river prawn',          th: 'วันนี้ · หมี่กรอบ + กุ้งแม่น้ำ' },
+  'song-wat':     { en: 'today · mee krob + raw prawn',             th: 'วันนี้ · หมี่กรอบ + กุ้งแช่น้ำปลา' },
   'sathorn-12':   { en: 'today · khao tom kradook moo from 08:00',  th: 'วันนี้ · ข้าวต้มกระดูกหมู เริ่ม 08:00' },
   'sukhumvit-23': { en: 'today · pla muek nam dum manao',           th: 'วันนี้ · ปลาหมึกน้ำดำมะนาว' },
 };
@@ -70,9 +57,7 @@ export default function Branches() {
                   aria-expanded={isOn}
                 >
                   <div className="flap-card absolute inset-0 w-full h-full">
-                    {/* FRONT — photo background + departure-board line + name */}
                     <div className="flap-face absolute inset-0 overflow-hidden bg-crow border border-[var(--rule)]">
-                      {/* atmospheric photo, very desaturated to keep type legible */}
                       {photo && (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
@@ -83,7 +68,6 @@ export default function Branches() {
                           loading="lazy"
                         />
                       )}
-                      {/* warm vermillion vignette + bottom fade */}
                       <div
                         className="absolute inset-0 pointer-events-none"
                         style={{
@@ -91,7 +75,6 @@ export default function Branches() {
                             'linear-gradient(180deg, rgba(10,9,7,0.15) 0%, rgba(10,9,7,0.5) 60%, rgba(10,9,7,0.92) 100%), radial-gradient(80% 60% at 35% 40%, rgba(168,48,42,0.18) 0%, rgba(168,48,42,0) 70%)',
                         }}
                       />
-                      {/* content stack */}
                       <div className="relative h-full p-7 flex flex-col">
                         <p className="font-sans text-[10.5px] uppercase tracking-[0.32em] text-vermillion">
                           {b.label[locale]}
@@ -106,8 +89,6 @@ export default function Branches() {
                         <p className="thai text-[13px] leading-relaxed text-bone/80 mt-4 max-w-[28ch] drop-shadow-[0_1px_8px_rgba(0,0,0,0.7)]">
                           {b.note[locale]}
                         </p>
-
-                        {/* departure-board row */}
                         <div className="mt-auto">
                           <span className="block h-px bg-vermillion/45 mb-3" />
                           <p className="font-sans text-[10px] uppercase tracking-[0.28em] text-brass_lt tabular-nums">
@@ -120,7 +101,6 @@ export default function Branches() {
                       </div>
                     </div>
 
-                    {/* BACK — the actual address card */}
                     <div className="flap-face flap-back absolute inset-0 bg-bone text-ink p-7 flex flex-col gap-3">
                       <p className="font-sans text-[10px] uppercase tracking-[0.32em] text-ash">
                         {b.label[locale]}
@@ -151,7 +131,6 @@ export default function Branches() {
           })}
         </div>
 
-        {/* Sister restaurant strip */}
         <Reveal delay={0.2}>
           <div className="mt-12 border border-[var(--rule)] bg-soot grid sm:grid-cols-[1fr_auto] items-center gap-6 px-7 py-6">
             <div>
