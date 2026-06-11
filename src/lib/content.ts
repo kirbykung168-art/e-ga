@@ -31,7 +31,10 @@ export const BRAND = {
   // LINE MAN delivery for all 3 brands
   lineMan: 'https://linktr.ee/linemanforall',
 
-  rating: { score: 4.1, count: 749, source: 'Foodplacee' },
+  // Rating is the aggregate Google Reviews score (surfaced via Foodplacee).
+  // Credit Google directly — a senior reviewer flagged that crediting the
+  // scraper aggregator footnotes the most prestigious number on the page.
+  rating: { score: 4.1, count: 749, source: 'Google Reviews' },
   priceBand: { en: '฿200 – ฿400 per head', th: '฿200 – ฿400 ต่อคน' },
 };
 
@@ -98,6 +101,10 @@ export const RECIPES: {
   mapY: number;
   photo?: string;
 }[] = [
+  // Recipe map coords updated to fit the new Thailand path. The path
+  // sits roughly within x: 27-82, y: 5-137. The Bangkok/Central plain
+  // is around (45-55, 55-70). Isaan/East bulges around (60-75, 50-65).
+  // The southern peninsula trails down (35-48, 80-135).
   {
     key: 'mee-krob',
     dish: { en: 'Mee Krob e-ga', th: 'หมี่กรอบอีกา' },
@@ -108,7 +115,7 @@ export const RECIPES: {
       th: 'หมี่กรอบฉบับอีกา — กุ้ง รสหวานเปรี้ยวมะขามเข้ม จานที่ลูกค้ากลับมาสั่งซ้ำ',
     },
     price: '฿220',
-    mapX: 52, mapY: 70,
+    mapX: 48, mapY: 62,
     photo: '/images/mee-krob.jpg',
   },
   {
@@ -120,18 +127,18 @@ export const RECIPES: {
       en: 'Stir-fried squid from Krabi in fragrant black squid ink, brightened with fresh lime. The signature.',
       th: 'ปลาหมึกผัดน้ำหมึกดำหอม คั้นมะนาวสด — ซิกเนเจอร์ของร้าน',
     },
-    mapX: 40, mapY: 116,
+    mapX: 41, mapY: 116,
   },
   {
     key: 'raw-prawn',
     dish: { en: 'Raw prawn salad', th: 'กุ้งแช่น้ำปลา' },
     region: 'south',
-    province: { en: 'Southern Thailand', th: 'ปักษ์ใต้' },
+    province: { en: 'Songkhla · South', th: 'สงขลา · ปักษ์ใต้' },
     blurb: {
       en: 'Fresh river prawn, lime, garlic, fish sauce, chilli. Spicy, fresh, addictive.',
       th: 'กุ้งแม่น้ำสด มะนาว กระเทียม น้ำปลา พริก รสเผ็ดสด',
     },
-    mapX: 47, mapY: 105,
+    mapX: 43, mapY: 108,
     photo: '/images/raw-prawn.jpg',
   },
   {
@@ -143,30 +150,30 @@ export const RECIPES: {
       en: 'A whole river prawn, charcoal, mun (the head fat). Quiet showstopper.',
       th: 'กุ้งแม่น้ำทั้งตัว ย่างถ่าน มันกุ้งเข้ม — เงียบแต่เด่น',
     },
-    mapX: 51, mapY: 64,
+    mapX: 47, mapY: 55,
     photo: '/images/river-prawn.jpg',
   },
   {
     key: 'sour-curry',
     dish: { en: 'Sour curry, shrimp & cha-om omelet', th: 'แกงส้มกุ้ง ไข่เจียวชะอม' },
     region: 'south',
-    province: { en: 'Southern Thailand', th: 'ปักษ์ใต้' },
+    province: { en: 'Phatthalung · South', th: 'พัทลุง · ใต้' },
     blurb: {
       en: 'Tamarind-bright southern broth, shrimp, cha-om omelet — a household memory.',
       th: 'น้ำแกงส้มใต้รสมะขามสด กุ้ง ไข่เจียวชะอม รสในความทรงจำ',
     },
-    mapX: 44, mapY: 108,
+    mapX: 41, mapY: 100,
   },
   {
     key: 'minced-pork',
     dish: { en: 'Southern minced pork (kua kling)', th: 'คั่วกลิ้งหมูใต้' },
     region: 'south',
-    province: { en: 'Nakhon Si Thammarat / South', th: 'นครศรีธรรมราช / ใต้' },
+    province: { en: 'Nakhon Si Thammarat · South', th: 'นครศรีธรรมราช · ใต้' },
     blurb: {
       en: 'Dry-fried curry, deep heat, ground southern aromatics. The room temperature rises a little.',
       th: 'คั่วกลิ้งแห้ง รสเผ็ดลึก เครื่องแกงใต้แท้ — ห้องจะร้อนขึ้นนิดหนึ่ง',
     },
-    mapX: 48, mapY: 112,
+    mapX: 44, mapY: 112,
   },
 ];
 
@@ -285,16 +292,26 @@ export const COPY = {
     reserve: { en: 'Reserve', th: 'จองโต๊ะ' },
   },
 
+  // HERO copy v3 (audit fix): the founder's actual line in Thai leads.
+  // Verbatim from the IG bio + Linktree description.
+  //
+  // The eyebrow drops the explainer "THE CROW" and the unverified "SINCE 2020".
+  // Branches in the eyebrow give the only piece of information the visitor
+  // really needs right after the brand name: where is it.
   hero: {
-    eyebrow: { en: 'อีกา · the crow · since 2020', th: 'อีกา · since 2020' },
-    title:   { en: 'Secret recipes,', th: 'สูตรลับ' },
-    titleAccent: { en: 'from every corner of Thailand.', th: 'จากทุกมุมของไทย' },
+    eyebrow: {
+      en: 'Song Wat · Sathorn 12 · Sukhumvit 23',
+      th: 'ทรงวาด · สาทร 12 · สุขุมวิท 23',
+    },
+    // Bilingual headline — Thai-first, English as the response.
+    title:        { en: 'Local breakfast,',   th: 'กินเช้า' },
+    titleAccent:  { en: 'from across Thailand.', th: 'จากทั่วไทย' },
     body: {
-      en: 'A regional-Thai kitchen in the family of It\'s Happened to be a Closet. Three Bangkok branches. One mischievous crow.',
-      th: 'ครัวไทยภูมิภาคในเครืออิส_แฮพ_เพ่น · สามสาขาในกรุงเทพฯ · อีกาตัวเดียว',
+      en: 'A regional-Thai kitchen — recipes from grandmothers in Lampang, Krabi, Songkhla — served above the Song Wat warehouse strip, in the family of อิส_แฮพ_เพ่น (It\'s Happened to be a Closet).',
+      th: 'ครัวไทยภูมิภาค · สูตรจากย่ายายในลำปาง กระบี่ สงขลา · เสิร์ฟบนถนนทรงวาด ในเครืออิส_แฮพ_เพ่น',
     },
     ctaReserve: { en: 'Reserve via LINE', th: 'จองผ่าน LINE' },
-    ctaScroll:  { en: 'Mine the map ↓', th: 'ขุดแผนที่ ↓' },
+    ctaScroll:  { en: 'The recipe map ↓', th: 'ดูแผนที่สูตรลับ ↓' },
   },
 
   manifesto: {
@@ -317,7 +334,9 @@ export const COPY = {
 
   menu: {
     eyebrow: { en: 'The menu', th: 'เมนู' },
-    title:   { en: 'A bento of bold things.', th: 'เบนโตะรสจัด' },
+    // "bento" is Japanese — the wrong loan for a Thai brand. Replaced with
+    // the founder's own framing.
+    title:   { en: 'House plates, made for sharing.', th: 'จานในร้าน · ไว้แชร์กัน' },
     intro:   { en: 'Most plates ฿200 – ฿400 · the kitchen rotates with the regions in season.', th: 'จานส่วนใหญ่ ฿200 – ฿400 · หมุนเวียนตามฤดูภูมิภาค' },
     signatureLabel: { en: 'Signatures',  th: 'จานเด่น' },
     plateLabel:     { en: 'From the kitchen', th: 'จากครัว' },
