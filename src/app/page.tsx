@@ -10,24 +10,19 @@ import Reserve from '@/components/Reserve';
 import Footer from '@/components/Footer';
 import FeatherCursor from '@/components/FeatherCursor';
 import EasterEgg from '@/components/EasterEgg';
-import StickyProof from '@/components/StickyProof';
 
 /**
  * e-ga · single-page tribute.
  *
- * Section order: Nav → Hero (ink-bleed signature) → Marquee → Manifesto
- *  → RegionalMap (pinned scroll set piece) → Menu (bento) → Branches
- *  (split-flap board) → PressWall → Reserve → Footer.
- *
- * Cross-cutting: FeatherCursor (desktop), EasterEgg (type "ega"),
- * StickyProof (rating + IG + LINE).
+ * Audit fix v3: removed StickyProof — a senior reviewer pointed out that
+ * editorial sites don't carry persistent CTAs; the rating already has a
+ * dedicated paired moment inside PressWall.
  */
 export default function HomePage() {
   return (
     <>
       <FeatherCursor />
       <EasterEgg />
-      <StickyProof />
       <Nav />
       <Hero />
       <Marquee />

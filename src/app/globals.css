@@ -4,15 +4,22 @@
 
 /* ================ TOKENS ================ */
 :root {
-  --ink:    #0A0907;
-  --soot:   #141210;
-  --crow:   #1A1814;
-  --bone:   #F2EBD8;
-  --rice:   #F8F4E7;
-  --lime:   #C9D24A;
-  --ash:    #8B847A;
-  --chalk:  #C9C1AE;
-  --rule:   rgba(201, 193, 174, 0.18);
+  --ink:       #0A0907;
+  --soot:      #141210;
+  --crow:      #1A1814;
+  --bone:      #F2EBD8;
+  --rice:      #F8F4E7;
+  /* Palette v3 — vermillion / brass replace the lime IDE-green accent */
+  --vermillion:#A8302A;
+  --ember:     #C75A2A;
+  --oxblood:   #5E1A18;
+  --brass:     #C18C3D;
+  --brass-lt:  #D9AC65;
+  /* legacy alias for any --lime that lingered */
+  --lime:      #A8302A;
+  --ash:       #8B847A;
+  --chalk:     #C9C1AE;
+  --rule:      rgba(201, 193, 174, 0.18);
 
   --ease:   cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-ink: cubic-bezier(0.7, 0, 0.3, 1);
