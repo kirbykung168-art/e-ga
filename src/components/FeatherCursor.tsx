@@ -43,7 +43,15 @@ export default function FeatherCursor() {
     const SHED_MS = 220;
     const FEATHER_LIFE_MS = 900;
 
+    let hasMoved = false;
     const onMove = (e: MouseEvent) => {
+      if (!hasMoved) {
+        hasMoved = true;
+        lead.style.opacity = '1';
+        // jump display to first cursor position so we don't ease from 0,0
+        displayX = e.clientX;
+        displayY = e.clientY;
+      }
       xRef.current = e.clientX;
       yRef.current = e.clientY;
     };
@@ -121,7 +129,7 @@ export default function FeatherCursor() {
       <div
         ref={leadRef}
         aria-hidden
-        className="cursor-lead fixed top-0 left-0 w-[18px] h-[18px] pointer-events-none z-[121] transition-[width,height,filter] duration-300 ease-out"
+        className="cursor-lead fixed top-0 left-0 w-[18px] h-[18px] pointer-events-none z-[121] opacity-0 transition-[width,height,filter] duration-300 ease-out"
       />
       <style jsx global>{`
         .cursor-lead {
