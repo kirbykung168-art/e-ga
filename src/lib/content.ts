@@ -316,7 +316,7 @@ export const COPY = {
   menu: {
     eyebrow: { en: 'The menu', th: 'เมนู' },
     title:   { en: 'House plates, made for sharing.', th: 'จานในร้าน · ไว้แชร์กัน' },
-    intro:   { en: 'Most plates ฿200 – ฿400 · the kitchen rotates with the regions in season.', th: 'จานส่วนใหญ่ ฿200 – ฿400 · หมุนเวียนตามฤดูภูมิภาค' },
+    intro:   { en: 'Most plates ฿200 – ฿400 · the regular menu is fixed; specials change with the kitchen.', th: 'จานส่วนใหญ่ ฿200 – ฿400 · เมนูประจำคงที่ ของพิเศษเปลี่ยนตามครัว' },
     signatureLabel: { en: 'Signatures',  th: 'จานเด่น' },
     plateLabel:     { en: 'From the kitchen', th: 'จากครัว' },
     dessertLabel:   { en: 'Desserts (the queue is for these)', th: 'ของหวาน (คนรอเพราะของหวาน)' },
