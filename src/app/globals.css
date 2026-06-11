@@ -42,8 +42,6 @@ body {
   font-weight: 300;
   letter-spacing: 0.005em;
   overflow-x: hidden;
-  /* hide the system cursor on desktop — we render our own feather field
-     under .feather-active root, set by FeatherCursor when it mounts. */
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -53,7 +51,7 @@ body {
   body.feather-active [data-cursor="hover"] { cursor: none; }
 }
 
-::selection { background: var(--lime); color: var(--ink); }
+::selection { background: var(--vermillion); color: var(--bone); }
 
 /* ================ TYPOGRAPHY ================ */
 .display {
@@ -118,34 +116,39 @@ body {
 .btn.btn-solid {
   background: var(--bone); color: var(--ink); border-color: var(--bone);
 }
-.btn.btn-solid::before { background: var(--lime); }
-.btn.btn-solid:hover { color: var(--ink); border-color: var(--lime); }
+.btn.btn-solid::before { background: var(--vermillion); }
+.btn.btn-solid:hover { color: var(--bone); border-color: var(--vermillion); }
 
 .btn-arrow { transition: transform 0.4s var(--ease); }
 .btn:hover .btn-arrow { transform: translateX(6px); }
 
 /* ================ INK BLEED MASK ================ */
-/* Used by the wordmark — an SVG turbulence morph that grows from a center point. */
 .ink-bleed {
   -webkit-mask-image: radial-gradient(circle at center, #000 var(--bleed, 0%), transparent calc(var(--bleed, 0%) + 8%));
           mask-image: radial-gradient(circle at center, #000 var(--bleed, 0%), transparent calc(var(--bleed, 0%) + 8%));
 }
 
 /* ================ SPLIT-FLAP ================ */
+/* Audit fix v4: transform-origin changed from "center bottom" to
+   "center center" (rotateY for in-place horizontal flip) so the back
+   face no longer swings outside the card slot. Added overflow:hidden
+   on .flap so any 3D depth that escapes during animation gets clipped. */
 .flap {
-  perspective: 800px;
+  perspective: 1000px;
+  overflow: hidden;
 }
 .flap-card {
   transform-style: preserve-3d;
-  transform-origin: center bottom;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: center center;
   transition: transform 0.65s cubic-bezier(0.7, 0, 0.3, 1);
 }
-.flap.is-on .flap-card { transform: rotateX(-180deg); }
+.flap.is-on .flap-card { transform: rotateY(180deg); }
 .flap-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-.flap-back { transform: rotateX(180deg); }
+.flap-back { transform: rotateY(180deg); }
 
 /* ================ SCAN / CRT FOR PRESS WALL ================ */
 .press-scan {
@@ -181,7 +184,6 @@ body {
 }
 .ink-bloom { animation: ink-bloom 1.6s var(--ease-ink) forwards; }
 
-/* Crow glide on scroll — uses --crow-x set via JS */
 .crow-glide {
   transform: translate3d(calc(var(--crow-x, 0px)), 0, 0);
   will-change: transform;
@@ -211,7 +213,7 @@ body {
 }
 
 /* ================ FOCUS ================ */
-:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+:focus-visible { outline: 2px solid var(--vermillion); outline-offset: 4px; }
 
 /* ================ REDUCED MOTION ================ */
 @media (prefers-reduced-motion: reduce) {

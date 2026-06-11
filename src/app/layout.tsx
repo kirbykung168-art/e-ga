@@ -3,6 +3,7 @@ import { Fraunces, Inter, Noto_Serif_Thai } from 'next/font/google';
 import './globals.css';
 import { BRAND, BRANCHES } from '@/lib/content';
 import { LanguageProvider } from '@/components/LanguageProvider';
+import HtmlLangSync from '@/components/HtmlLangSync';
 
 const fraunces = Fraunces({
   subsets: ['latin'], weight: ['300', '400', '500'], style: ['normal', 'italic'],
@@ -22,11 +23,11 @@ const SITE = 'https://e-ga.vercel.app';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: 'e-ga · อีกา — Regional Thai recipes, Bangkok',
-  description: 'Secret recipes from every corner of Thailand — Song Wat, Sathorn 12, Sukhumvit 23. From the It\'s Happened to be a Closet family.',
-  keywords: ['e-ga', 'อีกา', 'ega bangkok', 'Song Wat restaurant', 'It\'s Happened to be a Closet', 'Thai regional cuisine', 'Mee Krob e-ga', 'Pla Muek Nam Dum Manao'],
+  description: "Local breakfasts from across Thailand — Song Wat, Sathorn 12, Sukhumvit 23. In the family of It's Happened to be a Closet.",
+  keywords: ['e-ga', 'อีกา', 'ega bangkok', 'Song Wat restaurant', "It's Happened to be a Closet", 'Thai regional cuisine', 'Mee Krob e-ga', 'Pla Muek Nam Dum Manao'],
   openGraph: {
     title: 'e-ga · อีกา — Regional Thai recipes, Bangkok',
-    description: 'Secret recipes from every corner of Thailand.',
+    description: 'Local breakfasts from across Thailand.',
     type: 'website', siteName: 'e-ga', url: SITE,
     images: ['/og.jpg'],
   },
@@ -59,8 +60,14 @@ const JSONLD = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable} ${notoThai.variable}`}>
+    <html lang="en" translate="no" className={`${fraunces.variable} ${inter.variable} ${notoThai.variable}`}>
       <head>
+        {/* Prevent Chrome / Google auto-translate. Without this, a visitor
+            whose browser is set to auto-translate Thai sees the page's
+            Thai copy mangled into Chrome's literal English, bypassing our
+            curated EN strings. */}
+        <meta name="google" content="notranslate" />
+        <meta name="robots" content="notranslate" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }}
@@ -71,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Skip to content
         </a>
         <LanguageProvider>
+          <HtmlLangSync />
           <main id="main">{children}</main>
         </LanguageProvider>
       </body>
