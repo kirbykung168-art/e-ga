@@ -64,7 +64,7 @@ export default function Branches() {
                           src={photo.src}
                           alt={photo.alt}
                           className="absolute inset-0 w-full h-full object-cover opacity-55"
-                          style={{ filter: 'grayscale(40%) contrast(0.95) brightness(0.78)' }}
+                          style={{ filter: 'grayscale(10%) contrast(0.98) brightness(0.88)' }}
                           loading="lazy"
                         />
                       )}

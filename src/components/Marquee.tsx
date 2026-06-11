@@ -1,16 +1,15 @@
 'use client';
 
 import { useReducedMotion } from 'framer-motion';
+import { SMALL_MENU } from '@/lib/content';
 
-const TAGS = [
-  'Local Breakfast',
-  'Mee Krob e-ga',
-  'Pla Muek Nam Dum Manao',
-  'Raw Prawn Salad',
-  'Kanom Krok',
-  'Kua Kling',
-  'Sour Curry',
-  'River Prawn',
+// Marquee v4 (audit fix): derive the tape from the live menu data, so
+// when a dish is renamed in content.ts the marquee never goes stale.
+// Three signatures + the first six larger plates, locale-agnostic
+// (English names, since the marquee uppercase styling kills Thai).
+const TAGS: string[] = [
+  ...SMALL_MENU.signatures.map((s) => s.name.en),
+  ...SMALL_MENU.larger.slice(0, 6).map((p) => p.name.en),
 ];
 
 export default function Marquee() {

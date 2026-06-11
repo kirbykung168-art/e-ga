@@ -7,19 +7,14 @@ import { BRAND, COPY } from '@/lib/content';
 import { useLocale } from './LanguageProvider';
 
 /**
- * HERO v3 — palette + voice + signature reset (audit critic pass).
- *
- *  Photo: switched from the busy lab-19 "spread" to sawasdee-ega.jpg —
- *    the verified Sawasdee shot of e-ga Luv Seafood with the brand's
- *    hand-illustrated crab + octopus mascots on the shophouse window.
- *    Editorial. Atmospheric. Brand-coherent.
- *
- *  Headline: Thai-first ("กินเช้า / จากทั่วไทย"), the founder's verbatim
- *    line. The English ("Local breakfast, from across Thailand.") is the
- *    response, set in italic Fraunces with NO colour change.
- *
- *  Signature: replaced the geometric circle-clip wipe with a real SVG
- *    turbulence-displaced ink mask. Organic, watercolour-fed edges.
+ * HERO v4 (audit fix pass):
+ *  - Headline now locale-aware. In EN: large English headline + a small
+ *    Thai annotation underneath. In TH: large Thai headline + a small
+ *    English italic annotation underneath. No more redundant duplicate
+ *    of the same sentence at full size.
+ *  - Photo bottom veil loosened (0.55 -> 0.30) so the breakfast table
+ *    and the mascots breathe through.
+ *  - Ink-displacement contrast bumped so the watercolour edge reads.
  */
 export default function Hero() {
   const { locale } = useLocale();
@@ -29,6 +24,8 @@ export default function Hero() {
   const y       = useTransform(scrollYProgress, [0, 1], ['0%', '14%']);
   const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.5]);
   const crowX = useTransform(scrollYProgress, [0, 1], ['-20vw', '120vw']);
+
+  const isTh = locale === 'th';
 
   return (
     <section
@@ -61,16 +58,36 @@ export default function Hero() {
             {COPY.hero.eyebrow[locale]}
           </motion.p>
 
-          <h1 className="display leading-[1.02] text-bone" lang="th">
-            <span className="thai block font-normal" style={{ fontSize: 'clamp(48px, 7.8vw, 116px)', lineHeight: 1 }}>
-              {locale === 'th' ? COPY.hero.title.th : 'กินเช้า'}
-            </span>
-            <span className="thai block font-normal mt-1" style={{ fontSize: 'clamp(34px, 5.4vw, 80px)', lineHeight: 1.05, color: 'var(--brass-lt)' }}>
-              {locale === 'th' ? COPY.hero.titleAccent.th : 'จากทั่วไทย'}
-            </span>
-            <span className="block display-italic mt-6 text-bone/85" style={{ fontSize: 'clamp(20px, 2.2vw, 30px)', lineHeight: 1.2 }} lang="en">
-              {COPY.hero.title.en} {COPY.hero.titleAccent.en}
-            </span>
+          {/* Headline: in the active locale, at large display. The
+              opposite-language version is a small annotation underneath
+              for the bilingual gesture without duplicating the message
+              twice at full weight. */}
+          <h1 className="display leading-[1.02] text-bone" lang={locale}>
+            {isTh ? (
+              <>
+                <span className="thai block font-normal" style={{ fontSize: 'clamp(48px, 7.8vw, 116px)', lineHeight: 1 }}>
+                  {COPY.hero.title.th}
+                </span>
+                <span className="thai block font-normal mt-1" style={{ fontSize: 'clamp(34px, 5.4vw, 80px)', lineHeight: 1.05, color: 'var(--brass-lt)' }}>
+                  {COPY.hero.titleAccent.th}
+                </span>
+                <span className="block display-italic mt-6 text-bone/55" style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', lineHeight: 1.2 }} lang="en">
+                  {COPY.hero.title.en} {COPY.hero.titleAccent.en}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="block font-normal" style={{ fontSize: 'clamp(48px, 7.4vw, 108px)', lineHeight: 1 }}>
+                  {COPY.hero.title.en}
+                </span>
+                <span className="block display-italic font-normal mt-1" style={{ fontSize: 'clamp(34px, 5.2vw, 78px)', lineHeight: 1.05, color: 'var(--brass-lt)' }}>
+                  {COPY.hero.titleAccent.en}
+                </span>
+                <span className="thai block mt-6 text-bone/55" style={{ fontSize: 'clamp(14px, 1.4vw, 18px)', lineHeight: 1.4 }} lang="th">
+                  {COPY.hero.title.th} {COPY.hero.titleAccent.th}
+                </span>
+              </>
+            )}
           </h1>
 
           <motion.div
@@ -150,11 +167,12 @@ function InkMaskedImage({ src, alt, reduced }: { src: string; alt: string; reduc
           quality={88}
           className="object-cover object-center"
         />
+        {/* Veil loosened so the breakfast table breathes — was 0.55, now 0.30 */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'linear-gradient(180deg, rgba(10,9,7,0.08) 0%, rgba(10,9,7,0) 25%, rgba(10,9,7,0) 65%, rgba(10,9,7,0.55) 100%), radial-gradient(80% 60% at 50% 35%, rgba(168,48,42,0.10) 0%, rgba(168,48,42,0) 60%)',
+              'linear-gradient(180deg, rgba(10,9,7,0.04) 0%, rgba(10,9,7,0) 30%, rgba(10,9,7,0) 65%, rgba(10,9,7,0.30) 100%), radial-gradient(80% 60% at 50% 35%, rgba(168,48,42,0.08) 0%, rgba(168,48,42,0) 60%)',
           }}
         />
       </motion.div>

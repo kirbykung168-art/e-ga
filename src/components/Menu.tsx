@@ -35,38 +35,62 @@ export default function Menu() {
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-5 lg:gap-7 mb-16">
           <Reveal className="md:col-span-2 md:row-span-1">
-            <article className="relative h-full min-h-[300px] bg-soot border border-[var(--rule)] overflow-hidden p-7 lg:p-9 flex flex-col">
-              <svg viewBox="0 0 600 400" className="absolute inset-0 w-full h-full opacity-60 pointer-events-none" aria-hidden>
+            <article className="relative h-full min-h-[320px] bg-crow border border-[var(--rule)] overflow-hidden p-7 lg:p-9 flex flex-col">
+              {/* Heavier ink splatter — opacity 0.85, plus a second
+                  turbulence layer of vermillion droplets for depth.
+                  Plus a vermillion wash on the bottom-left so the card
+                  has chromatic presence even without a photograph. */}
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    'radial-gradient(70% 60% at 20% 80%, rgba(168,48,42,0.22) 0%, rgba(168,48,42,0) 65%), radial-gradient(60% 50% at 80% 25%, rgba(193,140,61,0.10) 0%, rgba(193,140,61,0) 60%)',
+                }}
+              />
+              <svg viewBox="0 0 600 400" className="absolute inset-0 w-full h-full opacity-90 pointer-events-none" aria-hidden>
                 <defs>
-                  <filter id="splat-2x">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.024" numOctaves="3" seed="3" />
-                    <feDisplacementMap in="SourceGraphic" scale="60" />
-                    <feGaussianBlur stdDeviation="0.6" />
+                  <filter id="splat-2x" x="-10%" y="-10%" width="120%" height="120%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.020" numOctaves="3" seed="3" />
+                    <feDisplacementMap in="SourceGraphic" scale="78" />
+                    <feGaussianBlur stdDeviation="0.8" />
+                  </filter>
+                  <filter id="splat-2x-fine" x="-10%" y="-10%" width="120%" height="120%">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="11" />
+                    <feDisplacementMap in="SourceGraphic" scale="32" />
                   </filter>
                 </defs>
-                <g filter="url(#splat-2x)">
-                  <circle cx="170" cy="180" r="120" fill="#000" />
-                  <circle cx="390" cy="220" r="90"  fill="#000" />
-                  <circle cx="490" cy="120" r="55"  fill="#000" />
-                  <ellipse cx="300" cy="320" rx="60" ry="30" fill="#000" />
+                <g filter="url(#splat-2x)" fill="#000">
+                  <circle cx="170" cy="180" r="140" />
+                  <circle cx="400" cy="230" r="110" />
+                  <circle cx="510" cy="120" r="68"  />
+                  <ellipse cx="300" cy="330" rx="80" ry="36" />
+                </g>
+                <g filter="url(#splat-2x-fine)" fill="rgba(168,48,42,0.55)">
+                  <circle cx="90"  cy="120" r="14" />
+                  <circle cx="120" cy="300" r="9"  />
+                  <circle cx="450" cy="60"  r="8"  />
+                  <circle cx="540" cy="280" r="11" />
                 </g>
               </svg>
+              {/* Brass architectural corner */}
+              <span aria-hidden className="absolute pointer-events-none" style={{ top: 28, right: 28, width: 56, height: 1, background: 'var(--brass)', opacity: 0.7 }} />
+              <span aria-hidden className="absolute pointer-events-none" style={{ top: 28, right: 28, width: 1, height: 56, background: 'var(--brass)', opacity: 0.7 }} />
               <div className="relative">
                 <p className="font-sans text-[10.5px] uppercase tracking-[0.32em] text-vermillion">
                   Signature · 2×
                 </p>
                 <h3
                   className="display leading-[1.04] text-bone mt-3"
-                  style={{ fontSize: 'clamp(32px, 4vw, 56px)' }}
+                  style={{ fontSize: 'clamp(32px, 4vw, 56px)', textShadow: '0 2px 14px rgba(0,0,0,0.7)' }}
                   lang={locale}
                 >
                   {SMALL_MENU.signatures[1].name[locale]}
                 </h3>
-                <p className="font-sans text-[14px] leading-relaxed text-bone/80 mt-5 max-w-[44ch]" lang={locale}>
+                <p className="font-sans text-[14px] leading-relaxed text-bone/85 mt-5 max-w-[44ch]" lang={locale}>
                   {SMALL_MENU.signatures[1].desc[locale]}
                 </p>
               </div>
-              <p className="relative mt-auto font-sans text-[10px] uppercase tracking-[0.32em] text-bone/40">
+              <p className="relative mt-auto font-sans text-[10px] uppercase tracking-[0.32em] text-brass tabular-nums">
                 Krabi · Andaman · daily
               </p>
             </article>
@@ -165,15 +189,15 @@ function SignatureCard({
       <img
         src={photo}
         alt={photoAlt}
-        className="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-[2000ms] ease-elegant group-hover:scale-[1.05]"
-        style={{ filter: 'grayscale(15%) contrast(1.02) brightness(0.78)' }}
+        className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-[2000ms] ease-elegant group-hover:scale-[1.05]"
+        style={{ filter: 'grayscale(8%) contrast(1.02) brightness(0.85)' }}
         loading="lazy"
       />
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'linear-gradient(180deg, rgba(10,9,7,0.20) 0%, rgba(10,9,7,0.55) 60%, rgba(10,9,7,0.92) 100%), radial-gradient(80% 60% at 30% 35%, rgba(168,48,42,0.18) 0%, rgba(168,48,42,0) 65%)',
+            'linear-gradient(180deg, rgba(10,9,7,0.15) 0%, rgba(10,9,7,0.40) 60%, rgba(10,9,7,0.85) 100%), radial-gradient(80% 60% at 30% 35%, rgba(168,48,42,0.16) 0%, rgba(168,48,42,0) 65%)',
         }}
       />
       <div className={`relative h-full ${isHero ? 'p-7 lg:p-9' : 'p-6 lg:p-7'} flex flex-col`}>
