@@ -339,7 +339,7 @@ export const COPY = {
   reserve: {
     title:   { en: 'Save your table.', th: 'จองโต๊ะของคุณ' },
     body:    { en: 'LINE OA handles every branch. DM works too.', th: 'LINE OA จัดการทุกสาขา · DM ก็ได้' },
-    line:    { en: 'Reserve / order on LINE', th: 'จอง / สั่งผ่าน LINE' },
+    line:    { en: 'Reserve on LINE', th: 'จองผ่าน LINE' },
     delivery:{ en: 'Order delivery via LINE MAN', th: 'สั่งกลับบ้านผ่าน LINE MAN' },
     dm:      { en: 'DM @ega_bangkok', th: 'DM @ega_bangkok' },
   },
