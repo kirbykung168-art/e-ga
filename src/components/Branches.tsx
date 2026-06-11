@@ -16,7 +16,9 @@ import Reveal from './Reveal';
  */
 export default function Branches() {
   const { locale } = useLocale();
-  const [open, setOpen] = useState<string | null>(BRANCHES[0].key);
+  // Default closed — first impression must show all three branches as
+  // unflipped boards. Tapping any one flips just that card.
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
     <section id="branches" className="relative bg-ink text-bone py-28 lg:py-36">

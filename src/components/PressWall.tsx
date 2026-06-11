@@ -14,8 +14,8 @@ export default function PressWall() {
           <Reveal>
             <p className="eyebrow text-lime">{COPY.press.eyebrow[locale]}</p>
             <h2
-              className="display leading-[1.02] mt-5"
-              style={{ fontSize: 'clamp(34px, 5vw, 76px)' }}
+              className="display leading-[1.02] mt-5 max-w-[14ch]"
+              style={{ fontSize: 'clamp(34px, 5vw, 72px)' }}
               lang={locale}
             >
               {COPY.press.title[locale]}

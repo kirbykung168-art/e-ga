@@ -68,31 +68,93 @@ export default function RegionalMap() {
 }
 
 function Map({ activeIdx, reduced }: { activeIdx: any; reduced: boolean }) {
-  // viewBox 0..100 wide, 0..140 tall — a roughly Thailand-shaped silhouette
+  // viewBox sized so the Thailand path drawn below sits comfortably with
+  // labels in the surrounding margin. The path itself is a stylised but
+  // recognisable Thailand silhouette: a head in the north, a slender
+  // Andaman peninsula trailing south, with the Gulf of Thailand carved
+  // out on the right at the bottom of the central plain. Coords on each
+  // recipe (RECIPES.mapX / mapY) target real provinces inside this shape.
   return (
-    <svg viewBox="0 0 100 140" className="w-full max-w-[420px]" aria-hidden>
+    <svg viewBox="0 0 100 140" className="w-full max-w-[440px]" aria-hidden>
       <defs>
         <filter id="ink-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="1.4" />
+          <feGaussianBlur stdDeviation="1.6" />
         </filter>
       </defs>
-      {/* simplified Thailand outline — abstract, art-directed */}
+
+      {/* ---- Thailand silhouette (stylised but topologically real) ---- */}
       <path
-        d="M48 6 C 60 8, 64 18, 60 28 C 58 36, 54 38, 56 46 C 60 54, 70 56, 70 62 C 70 68, 56 70, 54 76 C 52 84, 60 90, 58 96 C 56 102, 50 102, 46 108 C 42 116, 44 124, 38 132 C 32 138, 26 132, 30 126 C 38 116, 38 108, 36 100 C 32 92, 28 88, 30 80 C 32 70, 40 64, 38 56 C 34 46, 32 38, 36 28 C 38 18, 40 8, 48 6 Z"
-        fill="rgba(201,193,174,0.04)"
+        d="
+          M 36 6
+          C 32 8, 30 12, 32 18
+          C 33 22, 36 24, 38 24
+          C 36 28, 32 32, 32 38
+          C 32 44, 36 48, 42 50
+          C 46 52, 50 52, 54 52
+          C 60 52, 64 50, 66 54
+          C 68 58, 70 60, 70 64
+          C 70 68, 66 70, 60 72
+          C 56 72, 52 70, 50 74
+          C 48 78, 50 84, 52 88
+          C 54 92, 56 96, 54 100
+          C 52 104, 48 106, 46 110
+          C 44 114, 44 118, 42 122
+          C 40 126, 38 130, 36 134
+          C 34 137, 32 138, 30 134
+          C 30 130, 32 126, 34 122
+          C 36 116, 38 110, 36 104
+          C 34 100, 32 96, 34 90
+          C 36 84, 40 78, 38 72
+          C 34 66, 28 62, 26 56
+          C 24 50, 26 44, 28 38
+          C 30 30, 32 24, 30 18
+          C 28 12, 30 8, 32 6
+          C 34 5, 36 5, 36 6 Z"
+        fill="rgba(201,193,174,0.05)"
         stroke="rgba(201,193,174,0.32)"
-        strokeWidth="0.4"
+        strokeWidth="0.45"
+        strokeLinejoin="round"
       />
 
-      {/* region dots */}
+      {/* Andaman trailing peninsula — extra branch off the south */}
+      <path
+        d="
+          M 38 70
+          C 36 76, 34 82, 34 88
+          C 34 94, 36 100, 34 106
+        "
+        fill="none"
+        stroke="rgba(201,193,174,0.18)"
+        strokeWidth="0.35"
+        strokeDasharray="0.8 0.8"
+      />
+
+      {/* region dots (real province coords from manifest) */}
       {RECIPES.map((r, i) => (
         <Dot key={r.key} x={r.mapX} y={r.mapY} index={i} activeIdx={activeIdx} reduced={reduced} />
       ))}
 
-      {/* compass mark */}
-      <g transform="translate(86, 14)" fill="rgba(201,193,174,0.45)" stroke="rgba(201,193,174,0.45)" strokeWidth="0.4">
-        <circle cx="0" cy="0" r="4" fill="none" />
-        <text x="-1.6" y="-5.2" fontSize="3.2" stroke="none" fill="rgba(201,193,174,0.65)">N</text>
+      {/* labels — quiet aside the silhouette */}
+      <g fill="rgba(201,193,174,0.45)" fontFamily="var(--font-inter), sans-serif">
+        <text x="48" y="14" fontSize="2.6" letterSpacing="0.18em">NORTH</text>
+        <text x="48" y="46" fontSize="2.6" letterSpacing="0.18em">CENTRAL</text>
+        <text x="74" y="64" fontSize="2.6" letterSpacing="0.18em">EAST</text>
+        <text x="48" y="116" fontSize="2.6" letterSpacing="0.18em">SOUTH</text>
+        <text x="24" y="100" fontSize="2.6" letterSpacing="0.18em" textAnchor="end">ANDAMAN</text>
+      </g>
+
+      {/* gulf hint — a small wave to indicate water on the east */}
+      <path
+        d="M 72 76 C 80 80, 84 86, 80 94"
+        fill="none"
+        stroke="rgba(201,193,174,0.18)"
+        strokeWidth="0.3"
+      />
+
+      {/* compass rose */}
+      <g transform="translate(90, 12)" stroke="rgba(201,193,174,0.5)" strokeWidth="0.4" fill="rgba(201,193,174,0.5)">
+        <circle cx="0" cy="0" r="3.5" fill="none" />
+        <text x="-1.4" y="-4.6" fontSize="2.8" stroke="none" fill="rgba(201,193,174,0.7)">N</text>
         <line x1="0" y1="-3" x2="0" y2="3" />
         <line x1="-3" y1="0" x2="3" y2="0" />
       </g>

@@ -36,11 +36,13 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[100svh] w-full overflow-hidden bg-ink"
     >
-      {/* gliding crow svg — pinned at ~38vh */}
+      {/* gliding crow svg — pinned within hero section; clipped by overflow-hidden
+          so it doesn't leak smudges into later sections. Top placed higher so
+          it skims above the headline rather than crossing it. */}
       <motion.div
         aria-hidden
         style={{ x: crowX }}
-        className="pointer-events-none absolute left-0 top-[34vh] z-[5] w-[42px] h-[42px] text-bone/70"
+        className="pointer-events-none absolute left-0 top-[15%] z-[5] w-[36px] h-[36px] text-bone/55"
       >
         <svg viewBox="0 0 80 80" fill="currentColor">
           <path d="M16 50 C 22 30, 50 22, 64 36 L 70 34 L 60 44 C 54 52, 46 58, 36 58 C 28 58, 22 56, 16 50 Z" />
@@ -49,14 +51,14 @@ export default function Hero() {
         </svg>
       </motion.div>
 
-      <div className="relative z-10 mx-auto max-w-[1480px] px-5 lg:px-10 pt-[110px] lg:pt-[140px] pb-20 lg:pb-28 grid lg:grid-cols-[1.35fr_1fr] gap-12 lg:gap-20 items-center">
+      <div className="relative z-10 mx-auto max-w-[1480px] px-5 lg:px-10 pt-[120px] lg:pt-[140px] pb-16 lg:pb-24 grid lg:grid-cols-[1.2fr_1fr] gap-10 lg:gap-16 items-center">
         {/* left: type stack */}
         <div>
           <motion.p
             initial={reduced ? false : { opacity: 0, letterSpacing: '0.6em' }}
             animate={{ opacity: 1, letterSpacing: '0.48em' }}
             transition={{ duration: 1.4, delay: 0.6, ease: [0.22, 0.61, 0.36, 1] }}
-            className="font-sans uppercase mb-8 text-lime"
+            className="font-sans uppercase mb-7 text-lime"
             style={{ fontSize: 10.5, fontWeight: 500 }}
             lang={locale}
           >
@@ -64,12 +66,13 @@ export default function Hero() {
           </motion.p>
 
           <h1
-            className="display leading-[0.96] text-bone"
-            style={{ fontSize: 'clamp(48px, 8vw, 132px)' }}
+            className="display leading-[1.02] text-bone"
+            style={{ fontSize: 'clamp(38px, 5.8vw, 92px)' }}
             lang={locale}
           >
             <InkLine text={COPY.hero.title[locale]} delay={0.2} />
-            <span className="block display-italic text-lime mt-1">
+            {' '}
+            <span className="display-italic text-lime">
               <InkLine text={COPY.hero.titleAccent[locale]} delay={0.5} />
             </span>
           </h1>
