@@ -150,6 +150,16 @@ export default function Menu() {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://lin.ee/W4wRFeK"
+              target="_blank"
+              rel="noreferrer"
+              data-cursor="hover"
+              className="inline-flex mt-7 font-sans text-[11px] uppercase tracking-[0.32em] text-bone hover:text-vermillion underline underline-offset-8 decoration-bone/30 transition-colors duration-500"
+              lang={locale}
+            >
+              {COPY.menu.dessertCTA[locale]}
+            </a>
           </div>
           <div>
             <p className="eyebrow text-bone/55 border-b border-[var(--rule)] pb-4 mb-7" lang={locale}>
