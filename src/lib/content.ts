@@ -26,14 +26,9 @@ export const BRAND = {
   facebookUrl: 'https://facebook.com/egabangkok',
   facebookSathornUrl: 'https://facebook.com/egabangkoksathorn',
   linktreeUrl: 'https://linktr.ee/egabangkok',
-  // Linktree reservation link
   lineReserveUrl: 'https://lin.ee/W4wRFeK',
-  // LINE MAN delivery for all 3 brands
   lineMan: 'https://linktr.ee/linemanforall',
 
-  // Rating is the aggregate Google Reviews score (surfaced via Foodplacee).
-  // Credit Google directly — a senior reviewer flagged that crediting the
-  // scraper aggregator footnotes the most prestigious number on the page.
   rating: { score: 4.1, count: 749, source: 'Google Reviews' },
   priceBand: { en: '฿200 – ฿400 per head', th: '฿200 – ฿400 ต่อคน' },
 };
@@ -65,7 +60,7 @@ export const BRANCHES = [
     key: 'sukhumvit-23',
     name: { en: 'Sukhumvit 23', th: 'สุขุมวิท 23' },
     label: { en: 'e-ga / Sukhumvit 23', th: 'อีกา / สุขุมวิท 23' },
-    address: { en: 'Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110', th: 'ซอยสุขุมวิท 23 คลองเตยเหนือ วัฒนา กรุงเทพฯ 10110' },
+    address: { en: "Inside It's Happened to be a Closet, Soi Sukhumvit 23, Khlong Toei Nuea, Watthana, Bangkok 10110", th: "ในร้าน It's Happened to be a Closet · ซอยสุขุมวิท 23 · คลองเตยเหนือ · วัฒนา · กรุงเทพฯ 10110" },
     phoneDisplay: '082 789 2391',
     phoneTel: '+66827892391',
     hours: { en: 'Daily 08:00 – 22:00', th: 'ทุกวัน 08:00 – 22:00' },
@@ -83,10 +78,6 @@ export const SISTER = {
   location: { en: 'Song Wat Road', th: 'ทรงวาด' },
 };
 
-/* ===================================================================
- *  REGIONAL MAP — six recipes, six provinces.
- *  Coordinates are within a 0..100 viewBox over a stylised Thailand SVG.
- * =================================================================== */
 export type Region = 'north' | 'isaan' | 'central' | 'east' | 'south' | 'andaman';
 
 export const RECIPES: {
@@ -96,15 +87,10 @@ export const RECIPES: {
   province: { en: string; th: string };
   blurb: { en: string; th: string };
   price?: string;
-  // coords (viewBox 100x140) — for the pinned map dots
   mapX: number;
   mapY: number;
   photo?: string;
 }[] = [
-  // Recipe map coords updated to fit the new Thailand path. The path
-  // sits roughly within x: 27-82, y: 5-137. The Bangkok/Central plain
-  // is around (45-55, 55-70). Isaan/East bulges around (60-75, 50-65).
-  // The southern peninsula trails down (35-48, 80-135).
   {
     key: 'mee-krob',
     dish: { en: 'Mee Krob e-ga', th: 'หมี่กรอบอีกา' },
@@ -131,24 +117,24 @@ export const RECIPES: {
   },
   {
     key: 'raw-prawn',
-    dish: { en: 'Raw prawn salad', th: 'กุ้งแช่น้ำปลา' },
+    dish: { en: 'Raw prawn, bitter melon, green chili relish', th: 'กุ้งแช่น้ำปลา · มะระ · น้ำจิ้มซีฟู้ดเขียว' },
     region: 'south',
-    province: { en: 'Songkhla · South', th: 'สงขลา · ปักษ์ใต้' },
+    province: { en: 'Southern Thailand', th: 'ปักษ์ใต้' },
     blurb: {
-      en: 'Fresh river prawn, lime, garlic, fish sauce, chilli. Spicy, fresh, addictive.',
-      th: 'กุ้งแม่น้ำสด มะนาว กระเทียม น้ำปลา พริก รสเผ็ดสด',
+      en: 'Raw river prawn over thin-cut bitter melon, a bright green-chilli-garlic seafood relish, quail eggs and mint. Spicy, fresh, addictive.',
+      th: 'กุ้งสดวางบนมะระหั่นบาง · น้ำจิ้มซีฟู้ดเขียวจัดจ้าน · ไข่นกกระทา · ใบสะระแหน่',
     },
     mapX: 43, mapY: 108,
     photo: '/images/raw-prawn.jpg',
   },
   {
-    key: 'river-prawn',
-    dish: { en: 'River prawn', th: 'กุ้งแม่น้ำ' },
+    key: 'tamarind-shrimp',
+    dish: { en: 'Shrimp in tamarind sauce', th: 'กุ้งราดซอสมะขาม' },
     region: 'central',
-    province: { en: 'Ayutthaya / Central', th: 'อยุธยา / ภาคกลาง' },
+    province: { en: 'Central plain', th: 'ภาคกลาง' },
     blurb: {
-      en: 'A whole river prawn, charcoal, mun (the head fat). Quiet showstopper.',
-      th: 'กุ้งแม่น้ำทั้งตัว ย่างถ่าน มันกุ้งเข้ม — เงียบแต่เด่น',
+      en: 'Pan-fried prawns glazed in a sweet-sour tamarind reduction with fried shallot. Thai-Chinese kitchen staple, dialled up.',
+      th: 'กุ้งทอดราดซอสมะขามหวาน-เปรี้ยว โรยหอมแดงเจียว · จานไทย-จีน ฉบับเข้มข้น',
     },
     mapX: 47, mapY: 55,
     photo: '/images/river-prawn.jpg',
@@ -157,7 +143,7 @@ export const RECIPES: {
     key: 'sour-curry',
     dish: { en: 'Sour curry, shrimp & cha-om omelet', th: 'แกงส้มกุ้ง ไข่เจียวชะอม' },
     region: 'south',
-    province: { en: 'Phatthalung · South', th: 'พัทลุง · ใต้' },
+    province: { en: 'Southern Thailand', th: 'ปักษ์ใต้' },
     blurb: {
       en: 'Tamarind-bright southern broth, shrimp, cha-om omelet — a household memory.',
       th: 'น้ำแกงส้มใต้รสมะขามสด กุ้ง ไข่เจียวชะอม รสในความทรงจำ',
@@ -165,10 +151,22 @@ export const RECIPES: {
     mapX: 41, mapY: 100,
   },
   {
+    key: 'red-curry',
+    dish: { en: 'Spicy red curry · Asian red-tail catfish', th: 'แกงแดง · ปลาหางแดง' },
+    region: 'central',
+    province: { en: 'Central plain', th: 'ภาคกลาง' },
+    blurb: {
+      en: 'A brass pot of red curry — catfish, pumpkin, pea-eggplant, holy basil. Samurai Gourmet flagged this one specifically.',
+      th: 'แกงแดงเสิร์ฟในหม้อทองเหลือง · ปลาหางแดง ฟักทอง มะเขือพวง โหระพา · Samurai Gourmet เลือกจานนี้',
+    },
+    mapX: 50, mapY: 60,
+    photo: '/images/red-curry.jpg',
+  },
+  {
     key: 'minced-pork',
     dish: { en: 'Southern minced pork (kua kling)', th: 'คั่วกลิ้งหมูใต้' },
     region: 'south',
-    province: { en: 'Nakhon Si Thammarat · South', th: 'นครศรีธรรมราช · ใต้' },
+    province: { en: 'Southern Thailand', th: 'ปักษ์ใต้' },
     blurb: {
       en: 'Dry-fried curry, deep heat, ground southern aromatics. The room temperature rises a little.',
       th: 'คั่วกลิ้งแห้ง รสเผ็ดลึก เครื่องแกงใต้แท้ — ห้องจะร้อนขึ้นนิดหนึ่ง',
@@ -177,9 +175,6 @@ export const RECIPES: {
   },
 ];
 
-/* ===================================================================
- *  FULL MENU — verified prices where on record.
- * =================================================================== */
 export const SMALL_MENU = {
   signatures: [
     {
@@ -193,14 +188,16 @@ export const SMALL_MENU = {
       price: '— ask',
     },
     {
-      name: { en: 'Raw prawn salad', th: 'กุ้งแช่น้ำปลา' },
-      desc: { en: 'River prawn, garlic, chilli, fish sauce.', th: 'กุ้งแม่น้ำ · กระเทียม · พริก · น้ำปลา' },
+      name: { en: 'Raw prawn, bitter melon, green relish', th: 'กุ้งแช่น้ำปลา · มะระ' },
+      desc: { en: 'Raw prawn, bitter-melon slices, green seafood relish, quail eggs.', th: 'กุ้งสด · มะระหั่นบาง · น้ำจิ้มซีฟู้ดเขียว · ไข่นกกระทา' },
       price: '— ask',
     },
   ],
   larger: [
     { name: { en: 'Stewed pork with salted egg', th: 'หมูตุ๋นไข่เค็ม' }, price: '฿220' },
     { name: { en: 'Fried snakehead with fish sauce', th: 'ปลาช่อนทอดน้ำปลา' }, price: '฿490' },
+    { name: { en: 'Spicy red curry · Asian red-tail catfish', th: 'แกงแดงปลาหางแดง' } },
+    { name: { en: 'Shrimp in tamarind sauce', th: 'กุ้งราดซอสมะขาม' } },
     { name: { en: 'Khao yum pak tai', th: 'ข้าวยำปักษ์ใต้' } },
     { name: { en: 'Tom kha gai', th: 'ต้มข่าไก่' } },
     { name: { en: 'Spicy crispy salad', th: 'ยำกรอบ' } },
@@ -223,9 +220,6 @@ export const SMALL_MENU = {
   ],
 };
 
-/* ===================================================================
- *  PRESS WALL
- * =================================================================== */
 export const PRESS = [
   {
     publication: 'Thai Airways Sawasdee',
@@ -241,7 +235,7 @@ export const PRESS = [
   },
   {
     publication: 'Read The Cloud',
-    headline: { en: '"Thai neighbourhood cooking — recipes from communities, Lampang to Song Wat."', th: '"อาหารชุมชน · จากลำปลายมาศถึงทรงวาด"' },
+    headline: { en: '"Thai neighbourhood cooking — recipes from communities, Lamplaimat to Song Wat."', th: '"อาหารชุมชน · จากลำปลายมาศถึงทรงวาด"' },
     date: '',
     url: 'https://readthecloud.co/ega-bangkok/',
   },
@@ -259,9 +253,6 @@ export const PRESS = [
   },
 ];
 
-/* ===================================================================
- *  REVIEW VOICES (verified Google reviews via Foodplacee aggregator)
- * =================================================================== */
 export const REVIEWS = [
   {
     name: 'Adi Pebriawan',
@@ -277,9 +268,6 @@ export const REVIEWS = [
   },
 ];
 
-/* ===================================================================
- *  COPY — top-level
- * =================================================================== */
 export const COPY = {
   nav: {
     items: [
@@ -292,23 +280,16 @@ export const COPY = {
     reserve: { en: 'Reserve', th: 'จองโต๊ะ' },
   },
 
-  // HERO copy v3 (audit fix): the founder's actual line in Thai leads.
-  // Verbatim from the IG bio + Linktree description.
-  //
-  // The eyebrow drops the explainer "THE CROW" and the unverified "SINCE 2020".
-  // Branches in the eyebrow give the only piece of information the visitor
-  // really needs right after the brand name: where is it.
   hero: {
     eyebrow: {
       en: 'Song Wat · Sathorn 12 · Sukhumvit 23',
       th: 'ทรงวาด · สาทร 12 · สุขุมวิท 23',
     },
-    // Bilingual headline — Thai-first, English as the response.
     title:        { en: 'Local breakfast,',   th: 'กินเช้า' },
     titleAccent:  { en: 'from across Thailand.', th: 'จากทั่วไทย' },
     body: {
-      en: 'A regional-Thai kitchen — recipes from grandmothers in Lampang, Krabi, Songkhla — served above the Song Wat warehouse strip, in the family of อิส_แฮพ_เพ่น (It\'s Happened to be a Closet).',
-      th: 'ครัวไทยภูมิภาค · สูตรจากย่ายายในลำปาง กระบี่ สงขลา · เสิร์ฟบนถนนทรงวาด ในเครืออิส_แฮพ_เพ่น',
+      en: "A regional-Thai kitchen — recipes from communities across the country, Lamplaimat to Song Wat, Krabi to Sukhumvit — in the family of อิส_แฮพ_เพ่น (It's Happened to be a Closet).",
+      th: 'ครัวไทยภูมิภาค · สูตรจากชุมชนทั่วประเทศ · ลำปลายมาศถึงทรงวาด · กระบี่ถึงสุขุมวิท · ในเครืออิส_แฮพ_เพ่น',
     },
     ctaReserve: { en: 'Reserve via LINE', th: 'จองผ่าน LINE' },
     ctaScroll:  { en: 'The recipe map ↓', th: 'ดูแผนที่สูตรลับ ↓' },
@@ -328,14 +309,12 @@ export const COPY = {
 
   map: {
     eyebrow: { en: 'The recipe map', th: 'แผนที่สูตรลับ' },
-    title:   { en: 'Six dishes. Six provinces.', th: 'หกจาน · หกจังหวัด' },
+    title:   { en: 'Seven dishes. Seven provinces.', th: 'เจ็ดจาน · เจ็ดจังหวัด' },
     instr:   { en: 'Scroll the map — each region lights up as the kitchen tells its story.', th: 'เลื่อนแผนที่ · แต่ละภูมิภาคจะสว่างขึ้นทีละจาน' },
   },
 
   menu: {
     eyebrow: { en: 'The menu', th: 'เมนู' },
-    // "bento" is Japanese — the wrong loan for a Thai brand. Replaced with
-    // the founder's own framing.
     title:   { en: 'House plates, made for sharing.', th: 'จานในร้าน · ไว้แชร์กัน' },
     intro:   { en: 'Most plates ฿200 – ฿400 · the kitchen rotates with the regions in season.', th: 'จานส่วนใหญ่ ฿200 – ฿400 · หมุนเวียนตามฤดูภูมิภาค' },
     signatureLabel: { en: 'Signatures',  th: 'จานเด่น' },
