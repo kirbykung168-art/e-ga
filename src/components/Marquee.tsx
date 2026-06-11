@@ -33,3 +33,14 @@ export default function Marquee() {
     </div>
   );
 }
+
+function Tag({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center gap-10 font-sans text-[11.5px] uppercase tracking-[0.32em] text-bone/70">
+      {children}
+      <svg width="9" height="9" viewBox="0 0 9 9" aria-hidden>
+        <circle cx="4.5" cy="4.5" r="1.6" fill="var(--brass)" />
+      </svg>
+    </span>
+  );
+}
