@@ -128,13 +128,17 @@ function Map({ activeIdx, reduced }: { activeIdx: any; reduced: boolean }) {
         <Dot key={r.key} x={r.mapX} y={r.mapY} index={i} activeIdx={activeIdx} reduced={reduced} />
       ))}
 
+      {/* The five culinary regions of Thailand named in the Lufthansa
+          "In My Hood: Song Wat" piece (Note Pongsuang, Jan 2026):
+          North · Northeast (Isaan) · Central · East · South. Previous
+          build labelled "Gulf" and "Andaman" as regions — they're seas,
+          not culinary regions. Fixed. */}
       <g fontFamily="var(--font-fraunces), serif" fontStyle="italic">
-        <text x="42" y="13" fontSize="3.4" fill="rgba(193,140,61,0.7)">North</text>
-        <text x="55" y="47" fontSize="3.4" fill="rgba(193,140,61,0.7)">Isaan</text>
-        <text x="50" y="68" fontSize="3.4" fill="rgba(193,140,61,0.7)">Central</text>
-        <text x="58" y="86" fontSize="3.0" fill="rgba(193,140,61,0.55)">Gulf</text>
-        <text x="22" y="80" fontSize="3.0" fill="rgba(193,140,61,0.55)" textAnchor="end">Andaman</text>
-        <text x="42" y="128" fontSize="3.4" fill="rgba(193,140,61,0.7)">South</text>
+        <text x="44" y="14" fontSize="3.4" fill="rgba(193,140,61,0.7)">North</text>
+        <text x="58" y="40" fontSize="3.4" fill="rgba(193,140,61,0.7)">Isaan</text>
+        <text x="46" y="62" fontSize="3.4" fill="rgba(193,140,61,0.7)">Central</text>
+        <text x="64" y="72" fontSize="3.2" fill="rgba(193,140,61,0.7)">East</text>
+        <text x="40" y="118" fontSize="3.4" fill="rgba(193,140,61,0.7)">South</text>
       </g>
 
       <g transform="translate(89, 11)" fill="rgba(193,140,61,0.55)" stroke="rgba(193,140,61,0.55)" strokeWidth="0.35">
