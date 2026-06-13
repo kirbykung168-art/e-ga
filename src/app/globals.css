@@ -44,12 +44,8 @@ body {
   overflow-x: hidden;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  body.feather-active { cursor: none; }
-  body.feather-active a,
-  body.feather-active button,
-  body.feather-active [data-cursor="hover"] { cursor: none; }
-}
+/* v3: native cursor stays visible — the feather drift is atmosphere on top,
+   not a replacement. Links/buttons keep the OS pointer + hand. */
 
 ::selection { background: var(--vermillion); color: var(--bone); }
 
