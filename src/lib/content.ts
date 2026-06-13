@@ -377,6 +377,8 @@ export const REVIEWS = [
  * "is this real?" and the answer is one click away.
  */
 export const SOURCES = [
+  { claim: 'Recipes drawn from five regions of Thailand',                          publication: 'Lufthansa · In My Hood', url: 'https://www.lufthansa.com/pt/de/articles/explore-the-world/in-my-hood-song-wat-road-bangkok' },
+  { claim: 'e-ga LAB ushered in the new Song Wat era ~four years ago',              publication: 'Lufthansa · In My Hood', url: 'https://www.lufthansa.com/pt/de/articles/explore-the-world/in-my-hood-song-wat-road-bangkok' },
   { claim: 'e-ga is in the It\'s Happened to be a Closet family',                publication: 'BK Magazine',           url: 'https://www.bkmagazine.com/restaurants/bangkok-restaurant-reviews/its-happened-be-closet-0/' },
   { claim: 'Founder: Siriwan Tharananithikul (designer, Closet)',                  publication: 'BK Magazine',           url: 'https://www.bkmagazine.com/restaurants/bangkok-restaurant-reviews/its-happened-be-closet-0/' },
   { claim: '829 Song Wat Rd address',                                              publication: 'Samurai Gourmet',       url: 'https://samurai-gourmet.com/2022/08/17/ega-one-of-the-best-thai-restaurant-in-bangkok/' },
@@ -451,7 +453,10 @@ export const COPY = {
 
   map: {
     eyebrow: { en: 'The recipe map', th: 'แผนที่สูตรลับ' },
-    title:   { en: 'Seven dishes. Seven provinces.', th: 'เจ็ดจาน · เจ็ดจังหวัด' },
+    // Phrasing locked to Lufthansa "In My Hood: Song Wat" (Note Pongsuang,
+    // Jan 2026): "Die Gerichte basieren auf Rezepten aus fünf verschiedenen
+    // Regionen Thailands" — recipes from five different regions of Thailand.
+    title:   { en: 'Seven plates. Five regions.', th: 'เจ็ดจาน · ห้าภูมิภาค' },
     instr:   { en: 'Scroll the map — each region lights up as the kitchen tells its story.', th: 'เลื่อนแผนที่ · แต่ละภูมิภาคจะสว่างขึ้นทีละจาน' },
   },
 
