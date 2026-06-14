@@ -24,7 +24,7 @@ export default function Reserve() {
               target="_blank"
               rel="noreferrer"
               data-cursor="hover"
-              className="font-sans text-[11.5px] uppercase tracking-[0.28em] bg-ink text-bone px-8 py-4 hover:bg-lime hover:text-ink transition-colors duration-500"
+              className="font-sans text-[11.5px] uppercase tracking-[0.28em] bg-ink text-bone px-8 py-4 hover:bg-vermillion hover:text-ink transition-colors duration-500"
               lang={locale}
             >
               {COPY.reserve.line[locale]} →
