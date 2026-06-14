@@ -39,7 +39,7 @@ export default function StickyProof() {
         show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3 pointer-events-none'
       }`}
     >
-      <span className="font-sans text-[10.5px] tracking-[0.18em] uppercase text-lime tabular-nums">
+      <span className="font-sans text-[10.5px] tracking-[0.18em] uppercase text-vermillion tabular-nums">
         {BRAND.rating.score.toFixed(1)} ★
       </span>
       <span className="h-3 w-px bg-bone/30 hidden md:inline-block" />
@@ -51,7 +51,7 @@ export default function StickyProof() {
         href={BRAND.lineReserveUrl}
         target="_blank" rel="noreferrer"
         data-cursor="hover"
-        className="hidden md:inline-block font-sans text-[9.5px] uppercase tracking-[0.32em] text-bone hover:text-lime transition-colors duration-300"
+        className="hidden md:inline-block font-sans text-[9.5px] uppercase tracking-[0.32em] text-bone hover:text-vermillion transition-colors duration-300"
       >Reserve</a>
     </div>
   );
