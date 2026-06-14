@@ -420,7 +420,7 @@ export const COPY = {
       en: 'Song Wat · Sathorn 12 · Sukhumvit 23',
       th: 'ทรงวาด · สาทร 12 · สุขุมวิท 23',
     },
-    title:        { en: 'Local breakfast,',   th: 'กินเช้า' },
+    title:        { en: 'Local breakfast',   th: 'กินเช้า' },
     titleAccent:  { en: 'from across Thailand.', th: 'จากทั่วไทย' },
     body: {
       en: "A regional-Thai kitchen — recipes from communities across the country, Lamplaimat to Song Wat, Krabi to Sukhumvit — in the family of อิส_แฮพ_เพ่น (It's Happened to be a Closet).",
