@@ -37,7 +37,7 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               data-cursor="hover"
-              className="font-sans text-[11px] uppercase tracking-[0.32em] text-bone/75 hover:text-lime transition-colors duration-500"
+              className="font-sans text-[11px] uppercase tracking-[0.32em] text-bone/75 hover:text-vermillion transition-colors duration-500"
               lang={locale}
             >
               {item.label[locale]}
@@ -50,13 +50,13 @@ export default function Nav() {
             <button
               onClick={() => setLocale('en')}
               data-cursor="hover"
-              className={`px-2 py-1 transition-colors ${locale === 'en' ? 'text-lime' : 'hover:text-bone'}`}
+              className={`px-2 py-1 transition-colors ${locale === 'en' ? 'text-vermillion' : 'hover:text-bone'}`}
             >EN</button>
             <span className="text-bone/30">·</span>
             <button
               onClick={() => setLocale('th')}
               data-cursor="hover"
-              className={`px-2 py-1 transition-colors ${locale === 'th' ? 'text-lime' : 'hover:text-bone'}`}
+              className={`px-2 py-1 transition-colors ${locale === 'th' ? 'text-vermillion' : 'hover:text-bone'}`}
             >TH</button>
           </div>
 
@@ -65,7 +65,7 @@ export default function Nav() {
             target="_blank"
             rel="noreferrer"
             data-cursor="hover"
-            className="hidden md:inline-flex font-sans text-[10.5px] uppercase tracking-[0.32em] text-ink bg-bone px-4 py-2.5 hover:bg-lime transition-colors duration-500"
+            className="hidden md:inline-flex font-sans text-[10.5px] uppercase tracking-[0.32em] text-ink bg-bone px-4 py-2.5 hover:bg-vermillion transition-colors duration-500"
             lang={locale}
           >
             {COPY.nav.reserve[locale]} →
